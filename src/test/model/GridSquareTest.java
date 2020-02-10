@@ -27,7 +27,7 @@ public class GridSquareTest {
 
     @Test
     void testShootAtBoat() {
-        A1.addBoat();
+        A1.addBoat(1);
 
         assertEquals(101, A1.getSquareState());
 
@@ -38,6 +38,7 @@ public class GridSquareTest {
 
     @Test
     void testSinkBoat() {
+        A1.addBoat(1);
         A1.setBoatAsSunk();
 
         assertEquals(222, A1.getSquareState());

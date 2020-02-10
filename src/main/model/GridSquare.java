@@ -8,6 +8,7 @@ public class GridSquare {
     private static final int SUNK_BOAT_ON_SQUARE = 222;
 
     private int squareState;
+    private int boatRef;
 
     public GridSquare() {
         squareState = EMPTY_SQUARE;
@@ -17,8 +18,13 @@ public class GridSquare {
         return squareState;
     }
 
-    public void addBoat() {
+    public int getBoatRef() {
+        return boatRef;
+    }
+
+    public void addBoat(int boatID) {
         squareState = BOAT_ON_SQUARE;
+        boatRef = boatID;
     }
 
     public void setBoatAsSunk() {
