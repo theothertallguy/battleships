@@ -20,17 +20,18 @@ public class Grid {
 
     public Grid() {
         battleGrid = new GridSquare[GRID_SIZE][GRID_SIZE];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                battleGrid[i][j] = new GridSquare();
+            }
+        }
     }
 
     public int getCoordinateState(int gridX, int gridY) {
         return battleGrid[gridX][gridY].getSquareState();
     }
 
-    public void setBoatOnSquare(int gridX, int gridY, int boatID) {
-        battleGrid[gridX][gridY].addBoat(boatID);
-    }
-
-    public void shootAtBoat(int gridX, int gridY) {
+    public void shootAtGrid(int gridX, int gridY) {
         battleGrid[gridX][gridY].fireAtSquare();
         if (battleGrid[gridX][gridY].getSquareState() == 111) {
             int shipHit = battleGrid[gridX][gridY].getBoatRef();
@@ -52,10 +53,6 @@ public class Grid {
                     break;
             }
         }
-    }
-
-    public void sinkBoat(int gridX, int gridY) {
-        battleGrid[gridX][gridY].setBoatAsSunk();
     }
 
     public void makePatrolBoat(String coordinate, char direction) {
@@ -110,5 +107,76 @@ public class Grid {
             currGridX += boatXDir;
             currGridY += boatYDir;
         }
+    }
+
+    public int sunkBoatCheck() {
+        int boatsSunk = 0;
+
+        if (patrolHits == 2) {
+            sinkBoatOnGrid(patrolBoat);
+            boatsSunk++;
+        }
+
+        if (submarineHits == 3) {
+            sinkBoatOnGrid(submarineBoat);
+            boatsSunk++;
+        }
+
+        if (destroyerHits == 3) {
+            sinkBoatOnGrid(destroyerBoat);
+            boatsSunk++;
+        }
+
+        if (battleshipHits == 4) {
+            sinkBoatOnGrid(battleshipBoat);
+            boatsSunk++;
+        }
+
+        if (aircraftCarrierHits == 5) {
+            sinkBoatOnGrid(aircraftCarrierBoat);
+            boatsSunk++;
+        }
+
+        return boatsSunk;
+    }
+
+    public Boat getPatrolBoat() {
+        return patrolBoat;
+    }
+
+    public Boat getSubmarineBoat() {
+        return submarineBoat;
+    }
+
+    public Boat getDestroyerBoat() {
+        return destroyerBoat;
+    }
+
+    public Boat getBattleshipBoat() {
+        return battleshipBoat;
+    }
+
+    public Boat getAircraftCarrierBoat() {
+        return aircraftCarrierBoat;
+    }
+
+    public int getPatrolHits() {
+        return patrolHits;
+    }
+
+    public int getSubmarineHits() {
+        return submarineHits;
+    }
+
+    public int getDestroyerHits() {
+        return destroyerHits;
+    }
+
+    public int getBattleshipHits() {
+        return battleshipHits;
+    }
+
+    public int getAircraftCarrierHits() {
+        return aircraftCarrierHits;
     }
 }
