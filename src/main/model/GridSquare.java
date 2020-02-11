@@ -22,6 +22,8 @@ public class GridSquare {
         return boatRef;
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets square as having a boat on it, gives square ID of that particular boat
     public void addBoat(int boatID) {
         squareState = BOAT_ON_SQUARE;
         boatRef = boatID;

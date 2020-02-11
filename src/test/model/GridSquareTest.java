@@ -30,6 +30,7 @@ public class GridSquareTest {
         A1.addBoat(1);
 
         assertEquals(101, A1.getSquareState());
+        assertEquals(1, A1.getBoatRef());
 
         A1.fireAtSquare();
 

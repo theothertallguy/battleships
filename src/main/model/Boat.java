@@ -58,16 +58,20 @@ public class Boat {
     private void setDirection(char direction) {
         switch (direction) {
             case 'N':
+                facingX = 0;
                 facingY = -1;
                 break;
             case 'S':
+                facingX = 0;
                 facingY = 1;
                 break;
             case 'E':
                 facingX = 1;
+                facingY = 0;
                 break;
             case 'W':
                 facingX = -1;
+                facingY = 0;
                 break;
         }
     }
