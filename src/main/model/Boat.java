@@ -10,11 +10,11 @@ public class Boat {
     private int boatType;
     private int boatLength;
 
-    private int facingX = 0;
-    private int facingY = 0;
+    private int rowChange = 0;
+    private int columnChange = 0;
 
-    private int boatX = 0;
-    private int boatY = 0;
+    private int boatRow = 0;
+    private int boatColumn = 0;
 
     public Boat(int boatID, String coordinate, char direction) {
         boatType = boatID;
@@ -44,52 +44,50 @@ public class Boat {
     }
 
     private void setCoordinate(String coordinate) {
-        int x = coordinate.charAt(0);
-        int y = coordinate.charAt(1);
+        int row = coordinate.charAt(0);
+        int column = coordinate.charAt(1);
 
-        boatX = x - 65;
+        boatRow = row - 65;
         // A == ASCII 65
-        boatY = y - 48;
+        boatColumn = column - 48;
         // 0 == ASCII 48
-
-        //rows are x, columns are y
     }
 
     private void setDirection(char direction) {
         switch (direction) {
             case 'N':
-                facingX = 0;
-                facingY = -1;
+                rowChange = -1;
+                columnChange = 0;
                 break;
             case 'S':
-                facingX = 0;
-                facingY = 1;
+                rowChange = 1;
+                columnChange = 0;
                 break;
             case 'E':
-                facingX = 1;
-                facingY = 0;
+                rowChange = 0;
+                columnChange = 1;
                 break;
             case 'W':
-                facingX = -1;
-                facingY = 0;
+                rowChange = 0;
+                columnChange = -1;
                 break;
         }
     }
 
-    public int getX() {
-        return boatX;
+    public int getRow() {
+        return boatRow;
     }
 
-    public int getY() {
-        return boatY;
+    public int getColumn() {
+        return boatColumn;
     }
 
-    public int getXDir() {
-        return facingX;
+    public int getRowChange() {
+        return rowChange;
     }
 
-    public int getYDir() {
-        return facingY;
+    public int getColumnChange() {
+        return columnChange;
     }
 
     public int getBoatType() {

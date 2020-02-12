@@ -13,8 +13,8 @@ public class GridTest {
         testGrid = new Grid();
         testGrid.makePatrolBoat("C7", 'W');
         testGrid.makeSubmarineBoat("E4", 'E');
-        testGrid.makeDestroyerBoat("B0", 'S');
-        testGrid.makeBattleshipBoat("A4", 'N');
+        testGrid.makeDestroyerBoat("A1", 'S');
+        testGrid.makeBattleshipBoat("E0", 'N');
         testGrid.makeAircraftCarrierBoat("J9", 'N');
     }
 
@@ -64,25 +64,25 @@ public class GridTest {
         testGrid.shootAtGrid(0,0);
         assertEquals(110, testGrid.getCoordinateState(0,0));
 
-        testGrid.shootAtGrid(1,7);
-        assertEquals(111, testGrid.getCoordinateState(1,7));
+        testGrid.shootAtGrid(2,6);
+        assertEquals(111, testGrid.getCoordinateState(2,6));
         assertEquals(1, testGrid.getPatrolHits());
 
         testGrid.shootAtGrid(4,4);
         assertEquals(111, testGrid.getCoordinateState(4,4));
         assertEquals(1, testGrid.getSubmarineHits());
 
-        testGrid.shootAtGrid(1,0);
-        assertEquals(111, testGrid.getCoordinateState(1,0));
+        testGrid.shootAtGrid(1,1);
+        assertEquals(111, testGrid.getCoordinateState(1,1));
         assertEquals(1, testGrid.getDestroyerHits());
 
-        testGrid.shootAtGrid(0,2);
-        assertEquals(111, testGrid.getCoordinateState(0,2));
+        testGrid.shootAtGrid(2,0);
+        assertEquals(111, testGrid.getCoordinateState(2,0));
         assertEquals(1, testGrid.getBattleshipHits());
 
-        testGrid.shootAtGrid(9,5);
+        testGrid.shootAtGrid(5,9);
         testGrid.shootAtGrid(9,9);
-        assertEquals(111, testGrid.getCoordinateState(9,5));
+        assertEquals(111, testGrid.getCoordinateState(5,9));
         assertEquals(111, testGrid.getCoordinateState(9,9));
         assertEquals(2, testGrid.getAircraftCarrierHits());
     }
@@ -92,35 +92,45 @@ public class GridTest {
         assertEquals(0, testGrid.sunkBoatCheck());
 
         testGrid.shootAtGrid(2,7);
-        testGrid.shootAtGrid(1,7);
+        testGrid.shootAtGrid(2,6);
 
         assertEquals(1, testGrid.sunkBoatCheck());
 
         testGrid.shootAtGrid(4,4);
-        testGrid.shootAtGrid(5,4);
-        testGrid.shootAtGrid(6,4);
+        testGrid.shootAtGrid(4,5);
+        testGrid.shootAtGrid(4,6);
 
         assertEquals(2, testGrid.sunkBoatCheck());
 
-        testGrid.shootAtGrid(1,0);
+        testGrid.shootAtGrid(0,1);
         testGrid.shootAtGrid(1,1);
-        testGrid.shootAtGrid(1,2);
+        testGrid.shootAtGrid(2,1);
 
         assertEquals(3, testGrid.sunkBoatCheck());
 
-        testGrid.shootAtGrid(0,4);
-        testGrid.shootAtGrid(0,3);
-        testGrid.shootAtGrid(0,2);
-        testGrid.shootAtGrid(0,1);
+        testGrid.shootAtGrid(4,0);
+        testGrid.shootAtGrid(3,0);
+        testGrid.shootAtGrid(2,0);
+        testGrid.shootAtGrid(1,0);
 
         assertEquals(4, testGrid.sunkBoatCheck());
 
         testGrid.shootAtGrid(9,9);
-        testGrid.shootAtGrid(9,8);
-        testGrid.shootAtGrid(9,7);
-        testGrid.shootAtGrid(9,6);
-        testGrid.shootAtGrid(9,5);
+        testGrid.shootAtGrid(8,9);
+        testGrid.shootAtGrid(7,9);
+        testGrid.shootAtGrid(6,9);
+        testGrid.shootAtGrid(5,9);
 
         assertEquals(5, testGrid.sunkBoatCheck());
+    }
+
+    @Test
+    void testGetBoatRef() {
+        assertEquals(0, testGrid.getBoatTypeOnSquare(0, 0));
+        assertEquals(1, testGrid.getBoatTypeOnSquare(2, 7));
+        assertEquals(2, testGrid.getBoatTypeOnSquare(4, 4));
+        assertEquals(3, testGrid.getBoatTypeOnSquare(1, 1));
+        assertEquals(4, testGrid.getBoatTypeOnSquare(3, 0));
+        assertEquals(5, testGrid.getBoatTypeOnSquare(5, 9));
     }
 }

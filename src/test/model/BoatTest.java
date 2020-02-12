@@ -32,38 +32,38 @@ class BoatTest {
 
     @Test
     void testDirection() {
-        assertEquals(-1, myPB.getXDir());
-        assertEquals(0, myPB.getYDir());
+        assertEquals(0, myPB.getRowChange());
+        assertEquals(-1, myPB.getColumnChange());
 
-        assertEquals(1, mySB.getXDir());
-        assertEquals(0, mySB.getYDir());
+        assertEquals(0, mySB.getRowChange());
+        assertEquals(1, mySB.getColumnChange());
 
-        assertEquals(0, myDB.getXDir());
-        assertEquals(1, myDB.getYDir());
+        assertEquals(1, myDB.getRowChange());
+        assertEquals(0, myDB.getColumnChange());
 
-        assertEquals(0, myBB.getXDir());
-        assertEquals(-1, myBB.getYDir());
+        assertEquals(-1, myBB.getRowChange());
+        assertEquals(0, myBB.getColumnChange());
 
-        assertEquals(0, myACB.getXDir());
-        assertEquals(-1, myACB.getYDir());
+        assertEquals(-1, myACB.getRowChange());
+        assertEquals(0, myACB.getColumnChange());
     }
 
     @Test
     void testCoordinates() {
-        assertEquals(2, myPB.getX());
-        assertEquals(7, myPB.getY());
+        assertEquals(2, myPB.getRow());
+        assertEquals(7, myPB.getColumn());
 
-        assertEquals(4, mySB.getX());
-        assertEquals(4, mySB.getY());
+        assertEquals(4, mySB.getRow());
+        assertEquals(4, mySB.getColumn());
 
-        assertEquals(1, myDB.getX());
-        assertEquals(0, myDB.getY());
+        assertEquals(1, myDB.getRow());
+        assertEquals(0, myDB.getColumn());
 
-        assertEquals(0, myBB.getX());
-        assertEquals(4, myBB.getY());
+        assertEquals(0, myBB.getRow());
+        assertEquals(4, myBB.getColumn());
 
-        assertEquals(9, myACB.getX());
-        assertEquals(9, myACB.getY());
+        assertEquals(9, myACB.getRow());
+        assertEquals(9, myACB.getColumn());
     }
 
     @Test

@@ -27,14 +27,18 @@ public class Grid {
         }
     }
 
-    public int getCoordinateState(int gridX, int gridY) {
-        return battleGrid[gridX][gridY].getSquareState();
+    public int getCoordinateState(int gridRow, int gridColumn) {
+        return battleGrid[gridRow][gridColumn].getSquareState();
     }
 
-    public void shootAtGrid(int gridX, int gridY) {
-        battleGrid[gridX][gridY].fireAtSquare();
-        if (battleGrid[gridX][gridY].getSquareState() == 111) {
-            int shipHit = battleGrid[gridX][gridY].getBoatRef();
+    public int getBoatTypeOnSquare(int gridRow, int gridColumn) {
+        return battleGrid[gridRow][gridColumn].getBoatRef();
+    }
+
+    public void shootAtGrid(int gridRow, int gridColumn) {
+        battleGrid[gridRow][gridColumn].fireAtSquare();
+        if (battleGrid[gridRow][gridColumn].getSquareState() == 111) {
+            int shipHit = battleGrid[gridRow][gridColumn].getBoatRef();
             switch (shipHit) {
                 case 1:
                     patrolHits++;
@@ -83,29 +87,30 @@ public class Grid {
     private void placeBoatOnGrid(Boat boatToPlace) {
         int boatLength = boatToPlace.getBoatLength();
         int boatID = boatToPlace.getBoatType();
-        int currGridX = boatToPlace.getX();
-        int currGridY = boatToPlace.getY();
-        int boatXDir = boatToPlace.getXDir();
-        int boatYDir = boatToPlace.getYDir();
+        int currGridRow = boatToPlace.getRow();
+        int currGridColumn = boatToPlace.getColumn();
+        int boatRowChange = boatToPlace.getRowChange();
+        int boatColumnChange = boatToPlace.getColumnChange();
 
         for (int i = 0; i < boatLength; i++) {
-            battleGrid[currGridX][currGridY].addBoat(boatID);
-            currGridX += boatXDir;
-            currGridY += boatYDir;
+            System.out.println(currGridRow);
+            battleGrid[currGridRow][currGridColumn].addBoat(boatID);
+            currGridRow += boatRowChange;
+            currGridColumn += boatColumnChange;
         }
     }
 
     private void sinkBoatOnGrid(Boat boatToPlace) {
         int boatLength = boatToPlace.getBoatLength();
-        int currGridX = boatToPlace.getX();
-        int currGridY = boatToPlace.getY();
-        int boatXDir = boatToPlace.getXDir();
-        int boatYDir = boatToPlace.getYDir();
+        int currGridRow = boatToPlace.getRow();
+        int currGridColumn = boatToPlace.getColumn();
+        int boatRowChange = boatToPlace.getRowChange();
+        int boatColumnChange = boatToPlace.getColumnChange();
 
         for (int i = 0; i < boatLength; i++) {
-            battleGrid[currGridX][currGridY].setBoatAsSunk();
-            currGridX += boatXDir;
-            currGridY += boatYDir;
+            battleGrid[currGridRow][currGridColumn].setBoatAsSunk();
+            currGridRow += boatRowChange;
+            currGridColumn += boatColumnChange;
         }
     }
 
