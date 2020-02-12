@@ -23,4 +23,4 @@ Phase 1 Stories
 - As a user, I want to be able to add a ship to my grid.
 - As a user, I want to be able to shoot at my opponent's grid.
 - As a user, I want to be able to see what the outcome of my shots are
-- As a user, I want to be able to start a new game after somebody wins.
+- As a user, I want to be able to start a new game after the game ends.

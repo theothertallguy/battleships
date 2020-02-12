@@ -172,7 +172,6 @@ public class BattleshipGame {
         choice = choice.toUpperCase();
 
         if (choice.equals("Q")) {
-            System.out.println("Goodbye now.");
             gameIsBeingPlayed = false;
             shipBattleHasEnded = true;
         }
@@ -184,7 +183,6 @@ public class BattleshipGame {
         choice = choice.toUpperCase();
 
         if (choice.equals("Q")) {
-            System.out.println("Goodbye now.");
             gameIsBeingPlayed = false;
             shipBattleHasEnded = true;
         } else {
@@ -209,20 +207,20 @@ public class BattleshipGame {
     }
 
     private void askIfPlayingAgain() {
-        if (gameIsBeingPlayed == true) {
-            System.out.println("Would you like to play again? (Y -> Yes , N -> No)");
-            String againAnswer = userInput.nextLine();
-            System.out.println();
+        System.out.println("Would you like to play again? (Y -> Yes , N -> No)");
+        String againAnswer = userInput.nextLine();
+        System.out.println();
 
-            if (againAnswer.equals("Y")) {
-                System.out.println("Ok, restarting!");
-                player1 = new Grid();
-                player2 = new Grid();
-                currTurn = 1;
-                shipBattleHasEnded = false;
-            } else {
-                gameIsBeingPlayed = false;
-            }
+        if (againAnswer.equals("Y")) {
+            System.out.println("Ok, restarting!");
+            player1 = new Grid();
+            player2 = new Grid();
+            currTurn = 1;
+            shipBattleHasEnded = false;
+            gameIsBeingPlayed = true;
+        } else {
+            gameIsBeingPlayed = false;
+            System.out.println("Goodbye now.");
         }
     }
 
