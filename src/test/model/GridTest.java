@@ -133,4 +133,14 @@ public class GridTest {
         assertEquals(4, testGrid.getBoatTypeOnSquare(3, 0));
         assertEquals(5, testGrid.getBoatTypeOnSquare(5, 9));
     }
+
+    @Test
+    void testSwitchBranchPass() {
+        Boat weirdBoat = new Boat(6, "A6", 'U');
+
+        testGrid.placeBoatOnGrid(weirdBoat);
+
+        testGrid.shootAtGrid(0,6);
+        assertEquals(110, testGrid.getCoordinateState(0,6));
+    }
 }

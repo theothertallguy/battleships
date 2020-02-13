@@ -129,7 +129,7 @@ public class Grid {
     // coordinate and direction cannot make a ship overlap another or go off the grid
     //MODIFIES: GridSquare
     //EFFECTS: places a boat on the grid by setting each of the boat's squares to having that boat
-    private void placeBoatOnGrid(Boat boatToPlace) {
+    public void placeBoatOnGrid(Boat boatToPlace) {
         int boatLength = boatToPlace.getBoatLength();
         int boatID = boatToPlace.getBoatType();
         int currGridRow = boatToPlace.getRow();

@@ -74,4 +74,16 @@ class BoatTest {
         assertEquals(4, myBB.getBoatType());
         assertEquals(5, myACB.getBoatType());
     }
+
+    @Test
+    void testSwitchBranchPass() {
+        Boat weirdBoat = new Boat(6, "A6", 'U');
+
+        assertEquals(0, weirdBoat.getRowChange());
+        assertEquals(0, weirdBoat.getColumnChange());
+
+        assertEquals(0, weirdBoat.getBoatLength());
+
+        assertEquals(6, weirdBoat.getBoatType());
+    }
 }

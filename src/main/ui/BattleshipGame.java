@@ -4,6 +4,13 @@ import model.*;
 
 import java.util.Scanner;
 
+/*
+* This class runs the game on a loop. The game runs through each time, and when it ends, through someone winning ot the
+* player choosing to quit, they can choose to play again. The way it runs is each player places their ships, and the
+* players then take turns shooting a shot at the opponent's grid. Between each player's turn, they confirm the start and
+* end of their turns, so as to keep the other's board secret.
+* */
+
 public class BattleshipGame {
     private Grid player1 = new Grid();
     private Grid player2 = new Grid();
@@ -42,6 +49,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: creates each of the 5 boats and places each of them on the player's grid
     private void placeShips(Grid player) {
         if (gameIsBeingPlayed) {
             startTurn();
@@ -59,6 +67,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: receives user input about where they want their patrol boat to be placed, and in what direction
     private void placePatrolBoat(Grid player) {
         System.out.println("Choose the co-ordinate for your patrol boat.");
         String coordinate = userInput.nextLine();
@@ -74,6 +83,7 @@ public class BattleshipGame {
         printFriendlyGrid(player);
     }
 
+    //EFFECTS: receives user input about where they want their submarine to be placed, and in what direction
     private void placeSubmarineBoat(Grid player) {
         System.out.println("Choose the co-ordinate for your submarine.");
         String coordinate = userInput.nextLine();
@@ -89,6 +99,7 @@ public class BattleshipGame {
         printFriendlyGrid(player);
     }
 
+    //EFFECTS: receives user input about where they want their destroyer to be placed, and in what direction
     private void placeDestroyerBoat(Grid player) {
         System.out.println("Choose the co-ordinate for your destroyer.");
         String coordinate = userInput.nextLine();
@@ -104,6 +115,7 @@ public class BattleshipGame {
         printFriendlyGrid(player);
     }
 
+    //EFFECTS: receives user input about where they want their battleship to be placed, and in what direction
     private void placeBattleshipBoat(Grid player) {
         System.out.println("Choose the co-ordinate for your battleship.");
         String coordinate = userInput.nextLine();
@@ -119,6 +131,7 @@ public class BattleshipGame {
         printFriendlyGrid(player);
     }
 
+    //EFFECTS: receives user input about where they want their aircraft carrier to be placed, and in what direction
     private void placeAircraftCarrierBoat(Grid player) {
         System.out.println("Choose the co-ordinate for your aircraft carrier.");
         String coordinate = userInput.nextLine();
@@ -134,6 +147,8 @@ public class BattleshipGame {
         printFriendlyGrid(player);
     }
 
+    //MODIFIES: enemyPlayer (a Grid)
+    //EFFECTS: runs the player's turn; they input the coordinate of their shot, and then it shoots at the enemy grid
     private void yourTurn(Grid playerWithTurn, Grid enemyPlayer) {
         startTurn();
 
@@ -165,6 +180,8 @@ public class BattleshipGame {
         endTurn();
     }
 
+    //MODIFIES: this
+    //EFFECTS: confirms that the player wants to start their turn, or offers the option to quit
     private void startTurn() {
         System.out.println("If it isn't your turn, look away!");
         System.out.println("Otherwise, enter Q to quit, or anything else to start your turn.");
@@ -177,6 +194,8 @@ public class BattleshipGame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: a confirmation to end the current players turn, or quit if they want to
     private void endTurn() {
         System.out.println("If you want to quit, enter Q, otherwise, enter anything to end your turn.");
         String choice = userInput.nextLine();
@@ -190,6 +209,9 @@ public class BattleshipGame {
         }
     }
 
+    //REQUIRES: a valid coordinate
+    // a valid coordinate is a 2 character string, first A-J, second 0-9
+    //EFFECTS: gets the numbered row from a coordinate string
     private int getRow(String coordinate) {
         int row = coordinate.charAt(0);
 
@@ -198,6 +220,9 @@ public class BattleshipGame {
         return row;
     }
 
+    //REQUIRES: a valid coordinate
+    // a valid coordinate is a 2 character string, first A-J, second 0-9
+    //EFFECTS: gets the numbered column from a coordinate string
     private int getColumn(String coordinate) {
         int column = coordinate.charAt(1);
 
@@ -206,9 +231,12 @@ public class BattleshipGame {
         return column;
     }
 
+    //MODIFIES: this, Grid
+    //EFFECTS: asks the player if they want to play again, or quit out of the game
     private void askIfPlayingAgain() {
         System.out.println("Would you like to play again? (Y -> Yes , N -> No)");
         String againAnswer = userInput.nextLine();
+        againAnswer = againAnswer.toUpperCase();
         System.out.println();
 
         if (againAnswer.equals("Y")) {
@@ -224,11 +252,13 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: prints both the player and opponent grids for a regular turn
     public void printGrids(Grid playerGrid, Grid opponentGrid) {
         printFriendlyGrid(playerGrid);
         printEnemyGrid(opponentGrid);
     }
 
+    //EFFECTS: prints out the player's grid on their turn
     public void printFriendlyGrid(Grid myGrid) {
         System.out.println("-------Your Grid-------");
         System.out.println("# | 0 1 2 3 4 5 6 7 8 9");
@@ -247,6 +277,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: prints the grid for the opponent's grid on a player's turn
     public void printEnemyGrid(Grid theirGrid) {
         System.out.println();
         System.out.println("---Your Enemy's Grid---");
@@ -271,6 +302,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: returns the graphics for the grid icon based on the state of the swuare and the boat on it
     private String printState(int type, int state) {
         if (type == 1) {
             return patrolIcon(state);
@@ -287,6 +319,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: produces the graphics icon for a square with a patrol boat on it
     private String patrolIcon(int state) {
         if (state == 101) {
             return " P";
@@ -295,6 +328,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: produces the graphics icon for a square with a submarine on it
     private String submarineIcon(int state) {
         if (state == 101) {
             return " S";
@@ -303,6 +337,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: produces the graphics icon for a square with a destroyer on it
     private String destroyerIcon(int state) {
         if (state == 101) {
             return " D";
@@ -311,6 +346,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: produces the graphics icon for a square with a battleship on it
     private String battleshipIcon(int state) {
         if (state == 101) {
             return " B";
@@ -319,6 +355,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: produces the graphics icon for a square with an aircraft carrier on it
     private String aircraftCarrierIcon(int state) {
         if (state == 101) {
             return " A";
@@ -327,6 +364,7 @@ public class BattleshipGame {
         }
     }
 
+    //EFFECTS: produces the graphics icon for an empty square
     private String emptySquareIcon(int state) {
         if (state == 100) {
             return " -";

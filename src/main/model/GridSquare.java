@@ -1,5 +1,12 @@
 package model;
 
+/*
+* Each GridSquare has a state and a reference to a boat. A boat ID of 0 means there isn't a boat on it, and the boat ID
+* is meant to correspond with that of the Boat object placed on the grid at that point. There are 5 states, and each
+* represents one of the 5 possible states for a square to be in. a square can be empty or have a boat, and can be
+* shot at or not shot at, and if there is a boat and it's sunk, it records that as well.
+* */
+
 public class GridSquare {
     private static final int EMPTY_SQUARE = 100;
     private static final int MISSED_SQUARE = 110;
