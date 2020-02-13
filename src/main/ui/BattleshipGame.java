@@ -8,7 +8,7 @@ import java.util.Scanner;
 * This class runs the game on a loop. The game runs through each time, and when it ends, through someone winning ot the
 * player choosing to quit, they can choose to play again. The way it runs is each player places their ships, and the
 * players then take turns shooting a shot at the opponent's grid. Between each player's turn, they confirm the start and
-* end of their turns, so as to keep the other's board secret.
+* end of their turns, so as to keep the other's board secret. Players can quit between turns.
 * */
 
 public class BattleshipGame {
