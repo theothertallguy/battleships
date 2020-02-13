@@ -63,7 +63,7 @@ public class Grid {
                 case 4:
                     battleshipHits++;
                     break;
-                case 5:
+                default:
                     aircraftCarrierHits++;
                     break;
             }

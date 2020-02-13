@@ -1,7 +1,7 @@
 package model;
 
 /*
-* The Boat class hols all of the information for a particular boat in the game of Battleships. There are 5, namely the
+* The Boat class holds all of the information for a particular boat in the game of Battleships. There are 5, namely the
 * patrol boat, the submarine, the destroyer, the battleship, and the aircraft carrier. Each boat is stored as a point
 * and a direction, meaning that the boat starts at a point, and can be found in as many squares as equal to it's length
 * in the direction the boat has specified. Each boat has an ID from 1 through 5, in the order they were listed above.
