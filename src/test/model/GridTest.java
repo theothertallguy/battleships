@@ -136,7 +136,7 @@ public class GridTest {
 
     @Test
     void testSwitchBranchPass() {
-        Boat weirdBoat = new Boat(6, "A6", 'U');
+        Boat weirdBoat = new Boat(6, "A8", 'U');
 
         testGrid.placeBoatOnGrid(weirdBoat);
 
