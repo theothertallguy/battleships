@@ -23,29 +23,51 @@ public class BattleshipGame {
 
     public BattleshipGame() {
         while (gameIsBeingPlayed) {
-            System.out.println("Player 2, look away! Player 1, place your ships.");
-            placeShips(player1);
-            System.out.println("Player 1, look away! Player 2, place your ships.");
-            placeShips(player2);
+            runOnGameStart();
 
             while (!shipBattleHasEnded) {
-                if (player1.sunkBoatCheck() == 5) {
-                    System.out.println("Player 2 wins!");
-                    shipBattleHasEnded = true;
-                } else if (player2.sunkBoatCheck() == 5) {
-                    System.out.println("Player 1 wins!");
-                    shipBattleHasEnded = true;
-                } else if (currTurn == 1) {
-                    yourTurn(player1, player2);
-                    currTurn = 2;
-                } else if (currTurn == 2) {
-                    yourTurn(player2, player1);
-                    currTurn = 1;
-                }
+                turnChooser();
                 System.out.println();
             }
 
             askIfPlayingAgain();
+        }
+    }
+
+    private void runOnGameStart() {
+        System.out.println("Welcome to Battleships!");
+        System.out.println("Start A New Game | N");
+        System.out.println("Load Saved Game  | S");
+        System.out.println("Quit Application | Q");
+        String menuChoice = userInput.nextLine().toUpperCase();
+
+        if (menuChoice.equals("N")) {
+            System.out.println("New Game Start");
+        } else if (menuChoice.equals("S")) {
+            System.out.println("Here We Load!");
+        } else if (menuChoice.equals("Q")) {
+            System.out.println("GO AWAE");
+        }
+
+        System.out.println("Player 2, look away! Player 1, place your ships.");
+        placeShips(player1);
+        System.out.println("Player 1, look away! Player 2, place your ships.");
+        placeShips(player2);
+    }
+
+    private void turnChooser() {
+        if (player1.sunkBoatCheck() == 5) {
+            System.out.println("Player 2 wins!");
+            shipBattleHasEnded = true;
+        } else if (player2.sunkBoatCheck() == 5) {
+            System.out.println("Player 1 wins!");
+            shipBattleHasEnded = true;
+        } else if (currTurn == 1) {
+            yourTurn(player1, player2);
+            currTurn = 2;
+        } else if (currTurn == 2) {
+            yourTurn(player2, player1);
+            currTurn = 1;
         }
     }
 
