@@ -25,8 +25,13 @@ public class Boat {
     private int boatRow = 0;
     private int boatColumn = 0;
 
+    private String inputCoordinate;
+    private char inputDirection;
+
     public Boat(int boatID, String coordinate, char direction) {
         boatType = boatID;
+        inputCoordinate = coordinate;
+        inputDirection = direction;
         setBoatLength(boatID);
         setCoordinate(coordinate);
         setDirection(direction);
@@ -114,5 +119,13 @@ public class Boat {
 
     public int getBoatLength() {
         return  boatLength;
+    }
+
+    public String getInputCoordinate() {
+        return inputCoordinate;
+    }
+
+    public char getInputDirection() {
+        return inputDirection;
     }
 }

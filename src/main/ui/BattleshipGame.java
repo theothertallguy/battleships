@@ -2,6 +2,7 @@ package ui;
 
 import model.*;
 import persistence.LoadGame;
+import persistence.SaveGame;
 
 import java.util.Scanner;
 
@@ -283,7 +284,9 @@ public class BattleshipGame {
         } else if (againAnswer.equals("R")) {
             System.out.println("Resume Goes Here");
         } else if (againAnswer.equals("S")) {
-            System.out.println("Saving Goes Here");
+            SaveGame gameSave = new SaveGame(player1, player2, currTurn);
+            gameIsBeingPlayed = false;
+            System.out.println("Goodbye now.");
         } else {
             gameIsBeingPlayed = false;
             System.out.println("Goodbye now.");
