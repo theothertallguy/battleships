@@ -49,4 +49,12 @@ public class GridSquare {
             squareState = MISSED_SQUARE;
         }
     }
+
+    public void setSquareState(int state) {
+        squareState = state;
+    }
+
+    public void setBoatRef(int boatID) {
+        boatRef = boatID;
+    }
 }

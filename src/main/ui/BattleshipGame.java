@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import persistence.LoadGame;
 
 import java.util.Scanner;
 
@@ -18,6 +19,7 @@ public class BattleshipGame {
     private boolean gameIsBeingPlayed = true;
     private int currTurn = 1;
     private boolean shipBattleHasEnded = false;
+    private boolean playerIsLeaving = false;
 
     Scanner userInput = new Scanner(System.in);
 
@@ -30,29 +32,35 @@ public class BattleshipGame {
                 System.out.println();
             }
 
-            askIfPlayingAgain();
+            if (!playerIsLeaving) {
+                askIfPlayingAgain();
+            }
         }
     }
 
     private void runOnGameStart() {
         System.out.println("Welcome to Battleships!");
         System.out.println("Start A New Game | N");
-        System.out.println("Load Saved Game  | S");
+        System.out.println("Load Saved Game  | L");
         System.out.println("Quit Application | Q");
         String menuChoice = userInput.nextLine().toUpperCase();
 
         if (menuChoice.equals("N")) {
-            System.out.println("New Game Start");
-        } else if (menuChoice.equals("S")) {
-            System.out.println("Here We Load!");
+            System.out.println("New Game Start!");
+            System.out.println("Player 2, look away! Player 1, place your ships.");
+            placeShips(player1);
+            System.out.println("Player 1, look away! Player 2, place your ships.");
+            placeShips(player2);
+        } else if (menuChoice.equals("L")) {
+            LoadGame loadOldGame = new LoadGame();
+            player1 = loadOldGame.getPlayerOne();
+            player2 = loadOldGame.getPlayerTwo();
+            currTurn = loadOldGame.getTurn();
         } else if (menuChoice.equals("Q")) {
             System.out.println("GO AWAE");
+            gameIsBeingPlayed = false;
+            shipBattleHasEnded = true;
         }
-
-        System.out.println("Player 2, look away! Player 1, place your ships.");
-        placeShips(player1);
-        System.out.println("Player 1, look away! Player 2, place your ships.");
-        placeShips(player2);
     }
 
     private void turnChooser() {
@@ -256,18 +264,26 @@ public class BattleshipGame {
     //MODIFIES: this, Grid
     //EFFECTS: asks the player if they want to play again, or quit out of the game
     private void askIfPlayingAgain() {
-        System.out.println("Would you like to play again? (Y -> Yes , N -> No)");
+        System.out.println("Choose an Option");
+        System.out.println("Start A New Game    | N");
+        System.out.println("Resume Current Game | R");
+        System.out.println("Save And Quit       | S");
+        System.out.println("Quit Without Saving | Q");
         String againAnswer = userInput.nextLine();
         againAnswer = againAnswer.toUpperCase();
         System.out.println();
 
-        if (againAnswer.equals("Y")) {
+        if (againAnswer.equals("N")) {
             System.out.println("Ok, restarting!");
             player1 = new Grid();
             player2 = new Grid();
             currTurn = 1;
             shipBattleHasEnded = false;
             gameIsBeingPlayed = true;
+        } else if (againAnswer.equals("R")) {
+            System.out.println("Resume Goes Here");
+        } else if (againAnswer.equals("S")) {
+            System.out.println("Saving Goes Here");
         } else {
             gameIsBeingPlayed = false;
             System.out.println("Goodbye now.");
