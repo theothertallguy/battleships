@@ -9,29 +9,19 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class LoadGame {
-    private static final String PLAYER_ONE_SAVE_FILE = "./data/playerOneSaveTest.txt";
-    private static final String PLAYER_TWO_SAVE_FILE = "./data/playerTwoSaveTest.txt";
-
-    Grid player1 = new Grid();
-    Grid player2 = new Grid();
-
     int turn;
 
     public LoadGame() {
-        loadPlayer(player1, 1, PLAYER_ONE_SAVE_FILE);
-        loadPlayer(player2, 2, PLAYER_TWO_SAVE_FILE);
 
     }
 
-    private void loadPlayer(Grid player, int id, String file) {
+    public Grid loadPlayer(Grid player, int id, String file) {
         try {
             FileReader reader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(reader);
-            String line;
 
             for (int i = 0; i < 10; i++) {
-                line = bufferedReader.readLine();
-                setRow(player, i, line);
+                setRow(player, i, bufferedReader.readLine());
             }
 
             for (int i = 0; i < 5; i++) {
@@ -42,10 +32,10 @@ public class LoadGame {
             setTurn(id, bufferedReader.readLine());
 
             reader.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return player;
     }
 
     private void placeBoat(Grid player, String boatInfo) {
@@ -111,14 +101,6 @@ public class LoadGame {
         if (isTurn.equals("T,")) {
             turn = id;
         }
-    }
-
-    public Grid getPlayerOne() {
-        return player1;
-    }
-
-    public Grid getPlayerTwo() {
-        return player2;
     }
 
     public int getTurn() {

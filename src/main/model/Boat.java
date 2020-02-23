@@ -37,6 +37,14 @@ public class Boat {
         setDirection(direction);
     }
 
+    public boolean isEqualTo(Boat other) {
+        boolean typeEquals = (boatType == other.getBoatType());
+        boolean coordinateEquals = (inputCoordinate.equals(other.getInputCoordinate()));
+        boolean directionEquals = (inputDirection == other.getInputDirection());
+
+        return typeEquals && coordinateEquals && directionEquals;
+    }
+
     //REQUIRES: a boat ID of 1, 2, 3, 4, or 5
     //MODIFIES: this
     //EFFECTS: sets the length of the boat based on which boat ID was passed in

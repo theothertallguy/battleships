@@ -4,6 +4,7 @@ import model.*;
 import persistence.LoadGame;
 import persistence.SaveGame;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /*
@@ -14,6 +15,9 @@ import java.util.Scanner;
 * */
 
 public class BattleshipGame {
+    private static final String PLAYER_ONE_SAVE = "./data/playerOneGameSave.txt";
+    private static final String PLAYER_TWO_SAVE = "./data/playerTwoGameSave.txt";
+
     private Grid player1 = new Grid();
     private Grid player2 = new Grid();
 
@@ -54,8 +58,8 @@ public class BattleshipGame {
             placeShips(player2);
         } else if (menuChoice.equals("L")) {
             LoadGame loadOldGame = new LoadGame();
-            player1 = loadOldGame.getPlayerOne();
-            player2 = loadOldGame.getPlayerTwo();
+            player1 = loadOldGame.loadPlayer(player1, 1, PLAYER_ONE_SAVE);
+            player2 = loadOldGame.loadPlayer(player2, 2, PLAYER_TWO_SAVE);
             currTurn = loadOldGame.getTurn();
         } else if (menuChoice.equals("Q")) {
             System.out.println("GO AWAE");
@@ -275,22 +279,28 @@ public class BattleshipGame {
         System.out.println();
 
         if (againAnswer.equals("N")) {
-            System.out.println("Ok, restarting!");
-            player1 = new Grid();
-            player2 = new Grid();
-            currTurn = 1;
-            shipBattleHasEnded = false;
-            gameIsBeingPlayed = true;
+            gameReset();
         } else if (againAnswer.equals("R")) {
             System.out.println("Resume Goes Here");
         } else if (againAnswer.equals("S")) {
-            SaveGame gameSave = new SaveGame(player1, player2, currTurn);
+            SaveGame gameSave = new SaveGame();
+            gameSave.saveFile(player1, currTurn, 1, PLAYER_ONE_SAVE);
+            gameSave.saveFile(player2, currTurn, 2, PLAYER_TWO_SAVE);
             gameIsBeingPlayed = false;
             System.out.println("Goodbye now.");
         } else {
             gameIsBeingPlayed = false;
             System.out.println("Goodbye now.");
         }
+    }
+
+    private void gameReset() {
+        System.out.println("Ok, restarting!");
+        player1 = new Grid();
+        player2 = new Grid();
+        currTurn = 1;
+        shipBattleHasEnded = false;
+        gameIsBeingPlayed = true;
     }
 
     //EFFECTS: prints both the player and opponent grids for a regular turn

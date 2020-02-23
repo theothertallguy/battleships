@@ -6,15 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SaveGame {
-    private static final String PLAYER_ONE_SAVE = "./data/playerOneGameSave.txt";
-    private static final String PLAYER_TWO_SAVE = "./data/playerTwoGameSave.txt";
 
-    public SaveGame(Grid player1, Grid player2, int currTurn) {
-        saveFile(player1, currTurn, 1, PLAYER_ONE_SAVE);
-        saveFile(player2, currTurn, 1, PLAYER_TWO_SAVE);
+    public SaveGame() {
+
     }
 
-    private void saveFile(Grid player, int turn, int playerID, String filePath) {
+    public void saveFile(Grid player, int turn, int playerID, String filePath) {
         try {
             FileWriter writer = new FileWriter(filePath, false);
             writer.write(gridText(player));

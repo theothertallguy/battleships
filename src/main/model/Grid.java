@@ -35,6 +35,39 @@ public class Grid {
         }
     }
 
+    public boolean isEqualTo(Grid other) {
+        return boatsEqual(other) && gridEqual(other) && hitsEqual(other);
+    }
+
+    private boolean boatsEqual(Grid other) {
+        return patrolBoat.isEqualTo(other.getPatrolBoat())
+                && submarineBoat.isEqualTo(other.getSubmarineBoat())
+                && destroyerBoat.isEqualTo(other.getDestroyerBoat())
+                && battleshipBoat.isEqualTo(other.getBattleshipBoat())
+                && aircraftCarrierBoat.isEqualTo(other.getAircraftCarrierBoat());
+    }
+
+    private boolean gridEqual(Grid other) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (!(getCoordinateState(i,j) == other.getCoordinateState(i,j))) {
+                    return false;
+                } else if (!(getBoatTypeOnSquare(i,j) == other.getBoatTypeOnSquare(i,j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean hitsEqual(Grid other) {
+        return (patrolHits == other.getPatrolHits())
+                && (submarineHits == other.getSubmarineHits())
+                && (destroyerHits == other.getDestroyerHits())
+                && (battleshipHits == other.getBattleshipHits())
+                && (aircraftCarrierHits == other.getAircraftCarrierHits());
+    }
+
     public int getCoordinateState(int gridRow, int gridColumn) {
         return battleGrid[gridRow][gridColumn].getSquareState();
     }
