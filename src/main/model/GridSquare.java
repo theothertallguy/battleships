@@ -15,7 +15,7 @@ public class GridSquare {
     private static final int SUNK_BOAT_ON_SQUARE = 222;
 
     private int squareState;
-    private int boatRef;
+    private int boatRef = 0;
 
     public GridSquare() {
         squareState = EMPTY_SQUARE;

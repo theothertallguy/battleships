@@ -44,4 +44,16 @@ public class GridSquareTest {
 
         assertEquals(222, A1.getSquareState());
     }
+
+    @Test
+    void testSettingMethods() {
+        assertEquals(100,A1.getSquareState());
+        assertEquals(0,A1.getBoatRef());
+
+        A1.setSquareState(111);
+        A1.setBoatRef(3);
+
+        assertEquals(111,A1.getSquareState());
+        assertEquals(3,A1.getBoatRef());
+    }
 }
