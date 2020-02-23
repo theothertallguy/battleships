@@ -267,4 +267,48 @@ public class Grid {
     public int getAircraftCarrierHits() {
         return aircraftCarrierHits;
     }
+
+    public void setPatrolHits(int hits) {
+        patrolHits = hits;
+    }
+
+    public void setSubmarineHits(int hits) {
+        submarineHits = hits;
+    }
+
+    public void setDestroyerHits(int hits) {
+        destroyerHits = hits;
+    }
+
+    public void setBattleshipHits(int hits) {
+        battleshipHits = hits;
+    }
+
+    public void setAircraftCarrierHits(int hits) {
+        aircraftCarrierHits = hits;
+    }
+
+    public GridSquare[][] getBattleGrid() {
+        return battleGrid;
+    }
+
+    public void setPatrolBoat(Boat patrolBoat) {
+        this.patrolBoat = patrolBoat;
+    }
+
+    public void setSubmarineBoat(Boat submarineBoat) {
+        this.submarineBoat = submarineBoat;
+    }
+
+    public void setDestroyerBoat(Boat destroyerBoat) {
+        this.destroyerBoat = destroyerBoat;
+    }
+
+    public void setBattleshipBoat(Boat battleshipBoat) {
+        this.battleshipBoat = battleshipBoat;
+    }
+
+    public void setAircraftCarrierBoat(Boat aircraftCarrierBoat) {
+        this.aircraftCarrierBoat = aircraftCarrierBoat;
+    }
 }
