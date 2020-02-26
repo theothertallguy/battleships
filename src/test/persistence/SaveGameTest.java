@@ -24,12 +24,16 @@ public class SaveGameTest {
     @BeforeEach
     void runBefore() {
         LoadGame myLoadGame = new LoadGame();
-        player1 = myLoadGame.loadPlayer(player1,1,PLAYER_ONE_LOAD_FILE);
-        player2 = myLoadGame.loadPlayer(player2,2,PLAYER_TWO_LOAD_FILE);
-        turn = myLoadGame.getTurn();
-        SaveGame mySaveGame = new SaveGame();
-        mySaveGame.saveFile(player1,turn,1,PLAYER_ONE_SAVE_FILE);
-        mySaveGame.saveFile(player2,turn,2,PLAYER_TWO_SAVE_FILE);
+        try {
+            player1 = myLoadGame.loadPlayer(player1,1,PLAYER_ONE_LOAD_FILE);
+            player2 = myLoadGame.loadPlayer(player2,2,PLAYER_TWO_LOAD_FILE);
+            SaveGame mySaveGame = new SaveGame();
+            mySaveGame.saveFile(player1,turn,1,PLAYER_ONE_SAVE_FILE);
+            mySaveGame.saveFile(player2,turn,2,PLAYER_TWO_SAVE_FILE);
+            turn = myLoadGame.getTurn();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -69,4 +73,15 @@ public class SaveGameTest {
         readerSave.close();
         readerLoad.close();
     }
+    @Test
+    public void testIOExceptionExpected() {
+        SaveGame exceptionGame = new SaveGame();
+        try {
+            exceptionGame.saveFile(player1, 1,1, "cats");
+            fail("Uncaught exception!");
+        } catch (IOException e) {
+            //expected
+        }
+    }
+
 }

@@ -57,14 +57,22 @@ public class BattleshipGame {
             System.out.println("Player 1, look away! Player 2, place your ships.");
             placeShips(player2);
         } else if (menuChoice.equals("L")) {
-            LoadGame loadOldGame = new LoadGame();
-            player1 = loadOldGame.loadPlayer(player1, 1, PLAYER_ONE_SAVE);
-            player2 = loadOldGame.loadPlayer(player2, 2, PLAYER_TWO_SAVE);
-            currTurn = loadOldGame.getTurn();
+            gameLoader();
         } else if (menuChoice.equals("Q")) {
             System.out.println("GO AWAE");
             gameIsBeingPlayed = false;
             shipBattleHasEnded = true;
+        }
+    }
+
+    private void gameLoader() {
+        LoadGame loadOldGame = new LoadGame();
+        try {
+            player1 = loadOldGame.loadPlayer(player1, 1, PLAYER_ONE_SAVE);
+            player2 = loadOldGame.loadPlayer(player2, 2, PLAYER_TWO_SAVE);
+            currTurn = loadOldGame.getTurn();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -283,14 +291,22 @@ public class BattleshipGame {
         } else if (againAnswer.equals("R")) {
             System.out.println("Resume Goes Here");
         } else if (againAnswer.equals("S")) {
-            SaveGame gameSave = new SaveGame();
-            gameSave.saveFile(player1, currTurn, 1, PLAYER_ONE_SAVE);
-            gameSave.saveFile(player2, currTurn, 2, PLAYER_TWO_SAVE);
+            gameSaver();
             gameIsBeingPlayed = false;
             System.out.println("Goodbye now.");
         } else {
             gameIsBeingPlayed = false;
             System.out.println("Goodbye now.");
+        }
+    }
+
+    private void gameSaver() {
+        SaveGame gameSave = new SaveGame();
+        try {
+            gameSave.saveFile(player1, currTurn, 1, PLAYER_ONE_SAVE);
+            gameSave.saveFile(player2, currTurn, 2, PLAYER_TWO_SAVE);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

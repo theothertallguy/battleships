@@ -24,7 +24,7 @@ public class GridTest {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                assertEquals(100, testGrid.getBattleGrid()[i][j].getSquareState());
+                assertEquals(100, testGrid.getCoordinateState(i, j));
             }
         }
     }
@@ -135,68 +135,85 @@ public class GridTest {
     }
 
     @Test
-    void testSwitchBranchPass() {
-        Boat weirdBoat = new Boat(6, "A8", 'U');
-
-        testGrid.placeBoatOnGrid(weirdBoat);
-
-        testGrid.shootAtGrid(0,6);
-        assertEquals(110, testGrid.getCoordinateState(0,6));
+    void testIsEqualToSameGrids() {
+        assertTrue(testGrid.isEqualTo(testGrid));
     }
 
     @Test
-    void testIsEqualToBoatIDNotEqual() {
-        Grid equalGrid = new Grid();
-        equalGrid.makePatrolBoat("C7", 'W');
-        equalGrid.makeSubmarineBoat("E4", 'E');
-        equalGrid.makeDestroyerBoat("A1", 'S');
-        equalGrid.makeBattleshipBoat("E0", 'N');
-        equalGrid.makeAircraftCarrierBoat("J9", 'N');
+    void notEqualBecauseBoatHits() {
+        Grid badGrid = new Grid();
 
-        equalGrid.getBattleGrid()[0][0].setBoatRef(3);
+        badGrid.makePatrolBoat("C7", 'W');
+        badGrid.makeSubmarineBoat("E4", 'E');
+        badGrid.makeDestroyerBoat("A1", 'S');
+        badGrid.makeBattleshipBoat("E0", 'N');
+        badGrid.makeAircraftCarrierBoat("J9", 'N');
 
-        assertFalse(testGrid.isEqualTo(equalGrid));
+        assertTrue(badGrid.isEqualTo(testGrid));
+
+        badGrid.setPatrolHits(1);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setPatrolHits(0);
+
+        badGrid.setSubmarineHits(2);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setSubmarineHits(0);
+
+        badGrid.setDestroyerHits(3);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setDestroyerHits(0);
+
+        badGrid.setBattleshipHits(4);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setBattleshipHits(0);
+
+        badGrid.setAircraftCarrierHits(5);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setAircraftCarrierHits(0);
     }
 
     @Test
-    void testIsEqualToSquareStateNotEqual() {
-        Grid equalGrid = new Grid();
-        equalGrid.makePatrolBoat("C7", 'W');
-        equalGrid.makeSubmarineBoat("E4", 'E');
-        equalGrid.makeDestroyerBoat("A1", 'S');
-        equalGrid.makeBattleshipBoat("E0", 'N');
-        equalGrid.makeAircraftCarrierBoat("J9", 'N');
+    void testBoatNotEquals() {
+        Grid badGrid = new Grid();
 
-        equalGrid.shootAtGrid(2,2);
+        badGrid.makePatrolBoat("C7", 'W');
+        badGrid.makeSubmarineBoat("E4", 'E');
+        badGrid.makeDestroyerBoat("A1", 'S');
+        badGrid.makeBattleshipBoat("E0", 'N');
+        badGrid.makeAircraftCarrierBoat("J9", 'N');
 
-        assertFalse(testGrid.isEqualTo(equalGrid));
-    }
+        Boat goodPB = new Boat(1,"C7",'W');
+        Boat goodSB = new Boat(1,"E4",'E');
+        Boat goodDB = new Boat(1,"A1",'S');
+        Boat goodBB = new Boat(1,"E0",'N');
+        Boat goodAB = new Boat(1,"J9",'N');
 
-    @Test
-    void testExtraSetters() {
-        Grid equalGrid = new Grid();
-        equalGrid.setPatrolBoat(testGrid.getPatrolBoat());
-        equalGrid.setSubmarineBoat(testGrid.getSubmarineBoat());
-        equalGrid.setDestroyerBoat(testGrid.getDestroyerBoat());
-        equalGrid.setBattleshipBoat(testGrid.getBattleshipBoat());
-        equalGrid.setAircraftCarrierBoat(testGrid.getAircraftCarrierBoat());
+        Boat badPB = new Boat(1,"A9",'S');
+        Boat badSB = new Boat(2,"B8",'S');
+        Boat badDB = new Boat(3,"A9",'S');
+        Boat badBB = new Boat(4,"B8",'S');
+        Boat badAB = new Boat(5,"A9",'S');
 
-        assertTrue(equalGrid.getPatrolBoat().isEqualTo(testGrid.getPatrolBoat()));
-        assertTrue(equalGrid.getSubmarineBoat().isEqualTo(testGrid.getSubmarineBoat()));
-        assertTrue(equalGrid.getDestroyerBoat().isEqualTo(testGrid.getDestroyerBoat()));
-        assertTrue(equalGrid.getBattleshipBoat().isEqualTo(testGrid.getBattleshipBoat()));
-        assertTrue(equalGrid.getAircraftCarrierBoat().isEqualTo(testGrid.getAircraftCarrierBoat()));
+        assertTrue(badGrid.isEqualTo(testGrid));
 
-        equalGrid.setPatrolHits(1);
-        equalGrid.setSubmarineHits(1);
-        equalGrid.setDestroyerHits(1);
-        equalGrid.setBattleshipHits(1);
-        equalGrid.setAircraftCarrierHits(1);
+        badGrid.setPatrolBoat(badPB);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setPatrolBoat(goodPB);
 
-        assertEquals(1,equalGrid.getPatrolHits());
-        assertEquals(1,equalGrid.getSubmarineHits());
-        assertEquals(1,equalGrid.getDestroyerHits());
-        assertEquals(1,equalGrid.getBattleshipHits());
-        assertEquals(1,equalGrid.getAircraftCarrierHits());
+        badGrid.setSubmarineBoat(badSB);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setSubmarineBoat(goodSB);
+
+        badGrid.setDestroyerBoat(badDB);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setDestroyerBoat(goodDB);
+
+        badGrid.setBattleshipBoat(badBB);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setBattleshipBoat(goodBB);
+
+        badGrid.setAircraftCarrierBoat(badAB);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.setAircraftCarrierBoat(goodAB);
     }
 }

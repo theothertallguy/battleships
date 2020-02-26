@@ -15,26 +15,22 @@ public class LoadGame {
 
     }
 
-    public Grid loadPlayer(Grid player, int id, String file) {
-        try {
-            FileReader reader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+    public Grid loadPlayer(Grid player, int id, String file) throws IOException {
+        FileReader reader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(reader);
 
-            for (int i = 0; i < 10; i++) {
-                setRow(player, i, bufferedReader.readLine());
-            }
-
-            for (int i = 0; i < 5; i++) {
-                placeBoat(player, bufferedReader.readLine());
-            }
-
-            setHits(player, bufferedReader.readLine());
-            setTurn(id, bufferedReader.readLine());
-
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (int i = 0; i < 10; i++) {
+            setRow(player, i, bufferedReader.readLine());
         }
+
+        for (int i = 0; i < 5; i++) {
+            placeBoat(player, bufferedReader.readLine());
+        }
+
+        setHits(player, bufferedReader.readLine());
+        setTurn(id, bufferedReader.readLine());
+        reader.close();
+
         return player;
     }
 
@@ -56,7 +52,7 @@ public class LoadGame {
             case 4:
                 player.setBattleshipBoat(new Boat(boatType, coordinate, direction));
                 break;
-            case 5:
+            default:
                 player.setAircraftCarrierBoat(new Boat(boatType, coordinate, direction));
                 break;
         }

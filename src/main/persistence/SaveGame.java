@@ -11,16 +11,12 @@ public class SaveGame {
 
     }
 
-    public void saveFile(Grid player, int turn, int playerID, String filePath) {
-        try {
-            FileWriter writer = new FileWriter(filePath, false);
-            writer.write(gridText(player));
-            writer.write(boatText(player));
-            writer.write(statsText(player, turn, playerID));
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveFile(Grid player, int turn, int playerID, String filePath) throws IOException {
+        FileWriter writer = new FileWriter(filePath, false);
+        writer.write(gridText(player));
+        writer.write(boatText(player));
+        writer.write(statsText(player, turn, playerID));
+        writer.close();
     }
 
     private String gridText(Grid player) {

@@ -21,9 +21,13 @@ public class LoadGameTest {
     @BeforeEach
     void runBefore() {
         lg = new LoadGame();
-        player1 = lg.loadPlayer(player1, 1, PLAYER_ONE_SAVE_FILE);
-        player2 = lg.loadPlayer(player2, 2, PLAYER_TWO_SAVE_FILE);
-        turn = lg.getTurn();
+        try {
+            player1 = lg.loadPlayer(player1, 1, PLAYER_ONE_SAVE_FILE);
+            player2 = lg.loadPlayer(player2, 2, PLAYER_TWO_SAVE_FILE);
+            turn = lg.getTurn();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -93,5 +97,16 @@ public class LoadGameTest {
         testGrid.sunkBoatCheck();
 
         assertTrue(testGrid.isEqualTo(player2));
+    }
+
+    @Test
+    public void testIOExceptionExpected() {
+        LoadGame exceptionGame = new LoadGame();
+        try {
+            exceptionGame.loadPlayer(player1, 1, "cats");
+            fail("Uncaught exception!");
+        } catch (IOException e) {
+            //expected
+        }
     }
 }
