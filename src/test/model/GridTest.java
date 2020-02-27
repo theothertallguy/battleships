@@ -203,10 +203,10 @@ public class GridTest {
         badGrid.makeAircraftCarrierBoat("J9", 'N');
 
         Boat goodPB = new Boat(1,"C7",'W');
-        Boat goodSB = new Boat(1,"E4",'E');
-        Boat goodDB = new Boat(1,"A1",'S');
-        Boat goodBB = new Boat(1,"E0",'N');
-        Boat goodAB = new Boat(1,"J9",'N');
+        Boat goodSB = new Boat(2,"E4",'E');
+        Boat goodDB = new Boat(3,"A1",'S');
+        Boat goodBB = new Boat(4,"E0",'N');
+        Boat goodAB = new Boat(5,"J9",'N');
 
         Boat badPB = new Boat(1,"A9",'S');
         Boat badSB = new Boat(2,"B8",'S');
