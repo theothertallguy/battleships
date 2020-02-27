@@ -35,10 +35,14 @@ public class Grid {
         }
     }
 
+    //REQUIRES: a valid grid with no null fields
+    //EFFECTS: checks if all the fields in this and other match their respective fields
     public boolean isEqualTo(Grid other) {
         return boatsEqual(other) && gridEqual(other) && hitsEqual(other);
     }
 
+    //REQUIRES: a valid grid with no null fields
+    //EFFECTS: checks if all the fields in this' and other's Boats match their respective fields
     private boolean boatsEqual(Grid other) {
         return patrolBoat.isEqualTo(other.getPatrolBoat())
                 && submarineBoat.isEqualTo(other.getSubmarineBoat())
@@ -47,6 +51,8 @@ public class Grid {
                 && aircraftCarrierBoat.isEqualTo(other.getAircraftCarrierBoat());
     }
 
+    //REQUIRES: a valid grid with no null fields
+    //EFFECTS: checks if all the fields in this' and other's GridSquares match their respective fields
     private boolean gridEqual(Grid other) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -60,6 +66,8 @@ public class Grid {
         return true;
     }
 
+    //REQUIRES: a valid grid with no null fields
+    //EFFECTS: checks if all the hits in this and other match their respective fields
     private boolean hitsEqual(Grid other) {
         return (patrolHits == other.getPatrolHits())
                 && (submarineHits == other.getSubmarineHits())

@@ -4,9 +4,19 @@ import model.Boat;
 import model.Grid;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+/*
+ * Loads the player data from a save file and into the given Grid.
+ * Each grid square is saved as:
+ * squareState-boatRef,
+ * Boats are saved as:
+ * boatID,inputCoordinate,inputDirection
+ * Hits are saved as:
+ * patrolHits,submarineHits,destroyerHits,battleshipHits,aircraftCarrierHits
+ * Value denoting player turn is either T or F for true or false
+ * */
 
 public class LoadGame {
     int turn;
@@ -15,6 +25,10 @@ public class LoadGame {
 
     }
 
+    //REQUIRES: player is a valid Grid with no null fields, id = 1 or 2,
+    //file is a valid readable and accessible file path
+    //MODIFIES: player
+    //EFFECTS: loads the player data from file into the player Grid
     public Grid loadPlayer(Grid player, int id, String file) throws IOException {
         FileReader reader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -34,6 +48,9 @@ public class LoadGame {
         return player;
     }
 
+    //REQUIRES: player is a valid Grid, boatInfo is in the proper boat save format
+    //MODIFIES: player
+    //EFFECTS: loads the boats for the given player into the boat fields in the Grid
     private void placeBoat(Grid player, String boatInfo) {
         int boatType = boatInfo.charAt(0);
         boatType = boatType - 48;
@@ -58,6 +75,10 @@ public class LoadGame {
         }
     }
 
+    //REQUIRES: player is a valid Grid, rowText is in the proper grid square save format, 10 squares in the row
+    // 0 <= i <= 9
+    //MODIFIES: player
+    //EFFECTS: loads the row i for the given player into the GridSquare array
     private void setRow(Grid player, int i, String rowText) {
         for (int j = 0; j < 10; j++) {
             int subStart = 0 + (j * 6);
@@ -71,6 +92,9 @@ public class LoadGame {
         }
     }
 
+    //REQUIRES: player is a valid Grid, hitsInfo is in the proper hits save format
+    //MODIFIES: player
+    //EFFECTS: loads the hits for the given player into the hit fields in the Grid
     private void setHits(Grid player, String hitsInfo) {
         int patrolHits = hitsInfo.charAt(0);
         patrolHits = patrolHits - 48;

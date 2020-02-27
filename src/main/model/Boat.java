@@ -37,6 +37,8 @@ public class Boat {
         setDirection(direction);
     }
 
+    //REQUIRES: Boat other is a valid boat with no null fields
+    //EFFECTS: checks to see if each field in this and other match their respective partner
     public boolean isEqualTo(Boat other) {
         boolean typeEquals = (boatType == other.getBoatType());
         boolean coordinateEquals = (inputCoordinate.equals(other.getInputCoordinate()));

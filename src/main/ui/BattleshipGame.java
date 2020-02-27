@@ -30,7 +30,7 @@ public class BattleshipGame {
 
     public BattleshipGame() {
         while (gameIsBeingPlayed) {
-            runOnGameStart();
+            mainMenu();
 
             while (!shipBattleHasEnded) {
                 turnChooser();
@@ -43,7 +43,9 @@ public class BattleshipGame {
         }
     }
 
-    private void runOnGameStart() {
+    //MODIFIES: this
+    //EFFECTS: loads the main menu, and allows the player to choose what they want to do
+    private void mainMenu() {
         System.out.println("Welcome to Battleships!");
         System.out.println("Start A New Game | N");
         System.out.println("Load Saved Game  | L");
@@ -65,6 +67,8 @@ public class BattleshipGame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads the players' game saves into their game grids
     private void gameLoader() {
         LoadGame loadOldGame = new LoadGame();
         try {
@@ -76,6 +80,8 @@ public class BattleshipGame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: selects whose turn it is,a cnd checks to see if either player has won
     private void turnChooser() {
         if (player1.sunkBoatCheck() == 5) {
             System.out.println("Player 2 wins!");
@@ -300,6 +306,8 @@ public class BattleshipGame {
         }
     }
 
+    //MODIFIES: PLAYER_ONE_SAVE and PLAYER_TWO_SAVE
+    //EFFECTS: saves the game data for player 1 and player 2 in their respective saves
     private void gameSaver() {
         SaveGame gameSave = new SaveGame();
         try {
@@ -310,6 +318,8 @@ public class BattleshipGame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: resets the game back to two clear grids so game can restart
     private void gameReset() {
         System.out.println("Ok, restarting!");
         player1 = new Grid();
