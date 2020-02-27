@@ -64,7 +64,7 @@ public class Boat {
             case 4:
                 boatLength = BATTLESHIP_LENGTH;
                 break;
-            case 5:
+            default:
                 boatLength = AIRCRAFT_CARRIER_LENGTH;
                 break;
         }
@@ -100,7 +100,7 @@ public class Boat {
                 rowChange = 0;
                 columnChange = 1;
                 break;
-            case 'W':
+            default:
                 rowChange = 0;
                 columnChange = -1;
                 break;

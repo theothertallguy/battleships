@@ -76,14 +76,26 @@ class BoatTest {
     }
 
     @Test
-    void testSwitchBranchPass() {
-        Boat weirdBoat = new Boat(6, "A6", 'U');
+    void testIsEquals() {
+        Boat boat1 = new Boat(1,"A0",'N');
+        Boat boat2 = new Boat(2,"A0",'N');
+        Boat boat3 = new Boat(1,"A7",'N');
+        Boat boat4 = new Boat(1,"A0",'E');
+        Boat boat5 = new Boat(1,"A7",'E');
+        Boat boat6 = new Boat(2,"A0",'E');
+        Boat boat7 = new Boat(2,"A7",'N');
+        Boat boat8 = new Boat(2,"A7",'E');
 
-        assertEquals(0, weirdBoat.getRowChange());
-        assertEquals(0, weirdBoat.getColumnChange());
+        assertFalse(boat1.isEqualTo(boat2));
+        assertFalse(boat1.isEqualTo(boat3));
+        assertFalse(boat1.isEqualTo(boat4));
+        assertFalse(boat1.isEqualTo(boat5));
+        assertFalse(boat1.isEqualTo(boat6));
+        assertFalse(boat1.isEqualTo(boat7));
+        assertFalse(boat1.isEqualTo(boat8));
 
-        assertEquals(0, weirdBoat.getBoatLength());
+        Boat testDestroyer = new Boat(myDB.getBoatType(),myDB.getInputCoordinate(),myDB.getInputDirection());
 
-        assertEquals(6, weirdBoat.getBoatType());
+        assertTrue(myDB.isEqualTo(testDestroyer));
     }
 }
