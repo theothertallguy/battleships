@@ -61,9 +61,9 @@ public class BattleshipGame {
         } else if (menuChoice.equals("L")) {
             gameLoader();
         } else if (menuChoice.equals("Q")) {
-            System.out.println("GO AWAE");
             gameIsBeingPlayed = false;
             shipBattleHasEnded = true;
+            playerIsLeaving = true;
         }
     }
 
@@ -201,38 +201,40 @@ public class BattleshipGame {
     private void yourTurn(Grid playerWithTurn, Grid enemyPlayer) {
         startTurn();
 
-        printGrids(playerWithTurn, enemyPlayer);
-        System.out.println("Where would you like to shoot?");
-        String coordinate = userInput.nextLine();
-        coordinate = coordinate.toUpperCase();
+        if (gameIsBeingPlayed) {
+            printGrids(playerWithTurn, enemyPlayer);
+            System.out.println("Where would you like to shoot?");
+            String coordinate = userInput.nextLine();
+            coordinate = coordinate.toUpperCase();
 
-        int row = getRow(coordinate);
-        int column = getColumn(coordinate);
-        int sunkBefore = enemyPlayer.sunkBoatCheck();
+            int row = getRow(coordinate);
+            int column = getColumn(coordinate);
+            int sunkBefore = enemyPlayer.sunkBoatCheck();
 
-        enemyPlayer.shootAtGrid(row, column);
+            enemyPlayer.shootAtGrid(row, column);
 
-        int sunkAfter = enemyPlayer.sunkBoatCheck();
+            int sunkAfter = enemyPlayer.sunkBoatCheck();
 
-        printGrids(playerWithTurn, enemyPlayer);
+            printGrids(playerWithTurn, enemyPlayer);
 
-        if (enemyPlayer.getCoordinateState(row, column) < 111) {
-            System.out.println("You missed...");
-        } else {
-            System.out.println("You hit one of the enemy ships!");
+            if (enemyPlayer.getCoordinateState(row, column) < 111) {
+                System.out.println("You missed...");
+            } else {
+                System.out.println("You hit one of the enemy ships!");
+            }
+
+            if (sunkBefore != sunkAfter) {
+                System.out.println("Whoa! That hit sunk one of their ships!");
+            }
+
+            endTurn();
         }
-
-        if (sunkBefore != sunkAfter) {
-            System.out.println("Whoa! That hit sunk one of their ships!");
-        }
-
-        endTurn();
     }
 
     //MODIFIES: this
     //EFFECTS: confirms that the player wants to start their turn, or offers the option to quit
     private void startTurn() {
-        System.out.println("If it isn't your turn, look away!");
+        System.out.println("It's player " + currTurn + "'s turn. If it isn't your turn, look away!");
         System.out.println("Otherwise, enter Q to quit, or anything else to start your turn.");
         String choice = userInput.nextLine();
         choice = choice.toUpperCase();
