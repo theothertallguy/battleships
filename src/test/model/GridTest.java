@@ -140,6 +140,26 @@ public class GridTest {
     }
 
     @Test
+    void testNotEqualGridSquares() {
+        Grid badGrid = new Grid();
+
+        badGrid.makePatrolBoat("C7", 'W');
+        badGrid.makeSubmarineBoat("E4", 'E');
+        badGrid.makeDestroyerBoat("A1", 'S');
+        badGrid.makeBattleshipBoat("E0", 'N');
+        badGrid.makeAircraftCarrierBoat("J9", 'N');
+
+        assertTrue(testGrid.isEqualTo(testGrid));
+
+        badGrid.getBattleGrid()[0][0].setSquareState(111);
+        assertFalse(badGrid.isEqualTo(testGrid));
+        badGrid.getBattleGrid()[0][0].setSquareState(100);
+
+        badGrid.getBattleGrid()[0][0].setBoatRef(6);
+        assertFalse(badGrid.isEqualTo(testGrid));
+    }
+
+    @Test
     void notEqualBecauseBoatHits() {
         Grid badGrid = new Grid();
 
