@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -28,9 +27,9 @@ public class SaveGameTest {
             player1 = myLoadGame.loadPlayer(player1,1,PLAYER_ONE_LOAD_FILE);
             player2 = myLoadGame.loadPlayer(player2,2,PLAYER_TWO_LOAD_FILE);
             SaveGame mySaveGame = new SaveGame();
+            turn = myLoadGame.getTurn();
             mySaveGame.saveFile(player1,turn,1,PLAYER_ONE_SAVE_FILE);
             mySaveGame.saveFile(player2,turn,2,PLAYER_TWO_SAVE_FILE);
-            turn = myLoadGame.getTurn();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,7 +76,7 @@ public class SaveGameTest {
     public void testIOExceptionExpected() {
         SaveGame exceptionGame = new SaveGame();
         try {
-            exceptionGame.saveFile(player1, 1,1, "cats");
+            exceptionGame.saveFile(player1, 1,1, "");
             fail("Uncaught exception!");
         } catch (IOException e) {
             //expected
