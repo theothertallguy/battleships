@@ -8,11 +8,11 @@ package model;
 * */
 
 public class GridSquare {
-    private static final int EMPTY_SQUARE = 100;
-    private static final int MISSED_SQUARE = 110;
-    private static final int BOAT_ON_SQUARE = 101;
-    private static final int HIT_BOAT_ON_SQUARE = 111;
-    private static final int SUNK_BOAT_ON_SQUARE = 222;
+    public static final int EMPTY_SQUARE = 100;
+    public static final int MISSED_SQUARE = 110;
+    public static final int BOAT_ON_SQUARE = 101;
+    public static final int HIT_BOAT_ON_SQUARE = 111;
+    public static final int SUNK_BOAT_ON_SQUARE = 222;
 
     private int squareState;
     private int boatRef = 0;

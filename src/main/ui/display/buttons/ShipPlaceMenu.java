@@ -26,7 +26,15 @@ public class ShipPlaceMenu extends JPanel {
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameGUI.shipWait();
+                if (gameGUI.getMainPanel().stillPlacing()) {
+                    JOptionPane.showMessageDialog(null, "You must place all five ships.");
+                } else if (gameGUI.getGame().getCurrTurn() == 1) {
+                    gameGUI.getGame().swapTurn();
+                    gameGUI.shipWait();
+                } else if (gameGUI.getGame().getCurrTurn() == 2) {
+                    gameGUI.getGame().swapTurn();
+                    gameGUI.playerWait();
+                }
             }
         });
 

@@ -15,26 +15,26 @@ public class GridSquareTest {
 
     @Test
     void testConstructor() {
-        assertEquals(100, A1.getSquareState());
+        assertEquals(GridSquare.EMPTY_SQUARE, A1.getSquareState());
     }
 
     @Test
     void testShootAtEmptySquare() {
         A1.fireAtSquare();
 
-        assertEquals(110, A1.getSquareState());
+        assertEquals(GridSquare.MISSED_SQUARE, A1.getSquareState());
     }
 
     @Test
     void testShootAtBoat() {
         A1.addBoat(1);
 
-        assertEquals(101, A1.getSquareState());
+        assertEquals(GridSquare.BOAT_ON_SQUARE, A1.getSquareState());
         assertEquals(1, A1.getBoatRef());
 
         A1.fireAtSquare();
 
-        assertEquals(111, A1.getSquareState());
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE, A1.getSquareState());
     }
 
     @Test
@@ -42,18 +42,18 @@ public class GridSquareTest {
         A1.addBoat(1);
         A1.setBoatAsSunk();
 
-        assertEquals(222, A1.getSquareState());
+        assertEquals(GridSquare.SUNK_BOAT_ON_SQUARE, A1.getSquareState());
     }
 
     @Test
     void testSettingMethods() {
-        assertEquals(100,A1.getSquareState());
+        assertEquals(GridSquare.EMPTY_SQUARE,A1.getSquareState());
         assertEquals(0,A1.getBoatRef());
 
-        A1.setSquareState(111);
+        A1.setSquareState(GridSquare.HIT_BOAT_ON_SQUARE);
         A1.setBoatRef(3);
 
-        assertEquals(111,A1.getSquareState());
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE,A1.getSquareState());
         assertEquals(3,A1.getBoatRef());
     }
 }

@@ -13,50 +13,19 @@ public class GameOverMenu extends JPanel {
     public GameOverMenu(GameGUI gui) {
         gameGUI = gui;
         setBackground(Color.BLACK);
-        add(newGameButton());
-        add(loadGameButton());
-        add(instructionButton());
+        add(returnToMenuButton());
     }
 
-    private JButton instructionButton() {
-        JButton button4 = new JButton("Place Ships");
-        button4.setPreferredSize(new Dimension(300,150));
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameGUI.playerTurn();
-            }
-        });
-
-        return button4;
-
-    }
-
-    private JButton loadGameButton() {
-        JButton button4 = new JButton("Save and Exit");
-        button4.setPreferredSize(new Dimension(300,150));
-        button4.addActionListener(new ActionListener() {
+    private JButton returnToMenuButton() {
+        JButton button = new JButton("Return ToMainMenu");
+        button.setPreferredSize(new Dimension(300,150));
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameGUI.mainMenu();
             }
         });
 
-        return button4;
-
-    }
-
-    private JButton newGameButton() {
-        JButton button4 = new JButton("Exit Without Saving");
-        button4.setPreferredSize(new Dimension(300,150));
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameGUI.mainMenu();
-            }
-        });
-
-        return button4;
-
+        return button;
     }
 }

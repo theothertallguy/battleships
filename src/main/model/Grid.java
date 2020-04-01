@@ -89,7 +89,7 @@ public class Grid {
     //EFFECTS: fires a shot at the given square, records a boat hit if that boat was hit
     public void shootAtGrid(int gridRow, int gridColumn) {
         battleGrid[gridRow][gridColumn].fireAtSquare();
-        if (battleGrid[gridRow][gridColumn].getSquareState() == 111) {
+        if (battleGrid[gridRow][gridColumn].getSquareState() == GridSquare.HIT_BOAT_ON_SQUARE) {
             int shipHit = battleGrid[gridRow][gridColumn].getBoatRef();
             switch (shipHit) {
                 case 1:
@@ -182,6 +182,17 @@ public class Grid {
             battleGrid[currGridRow][currGridColumn].addBoat(boatID);
             currGridRow += boatRowChange;
             currGridColumn += boatColumnChange;
+        }
+    }
+
+    public void removeBoatFromGrid(int boatID) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (getBoatTypeOnSquare(i,j) == boatID) {
+                    getBattleGrid()[i][j].setBoatRef(0);
+                    getBattleGrid()[i][j].setSquareState(GridSquare.EMPTY_SQUARE);
+                }
+            }
         }
     }
 

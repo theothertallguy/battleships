@@ -1,7 +1,5 @@
 package ui.display;
 
-import model.Grid;
-import persistence.LoadGame;
 import ui.BattleshipGame;
 import ui.display.buttons.ButtonBox;
 import ui.display.screens.*;
@@ -9,11 +7,8 @@ import ui.display.screens.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 import javax.swing.*;
-
-//Please move mouse listener to screen instead of frame so it registers on frame, see if a fix
 
 public class GameGUI {
 

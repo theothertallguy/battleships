@@ -2,7 +2,6 @@ package ui.display.screens;
 
 import model.Grid;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -25,8 +24,6 @@ public class PlayerTurnScreen extends Screen {
         Font font = new Font("Serif", Font.PLAIN, 60);
 
         g.setFont(font);
-
-        FontMetrics fontMetrics = g.getFontMetrics();
         g.setColor(Color.BLACK);
         g.fillRect(0,0, 2000,2000);
 
@@ -48,10 +45,14 @@ public class PlayerTurnScreen extends Screen {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 g.drawRect((50 + j * 50),(50 + i * 50),50,50);
+                g.setColor(Color.ORANGE);
                 g.drawString(getSTR(i,j), (55 + j * 50),(95 + i * 50));
+                g.setColor(new Color(17,22,133));
 
                 g.drawRect((700 + j * 50),(50 + i * 50),50,50);
+                g.setColor(Color.LIGHT_GRAY);
                 g.drawString(oppSTR(i,j), (705 + j * 50),(95 + i * 50));
+                g.setColor(new Color(17,22,133));
             }
             drawLabels(i, g);
         }
@@ -96,7 +97,11 @@ public class PlayerTurnScreen extends Screen {
             y = y + 10;
             y = y + 45;
 
-            select = new Point(x,y);
+            int oppSqrState = theirGrid.getCoordinateState(fireY,fireX);
+
+            if (oppSqrState == 100 || oppSqrState == 101) {
+                select = new Point(x,y);
+            }
         }
     }
 
@@ -114,7 +119,7 @@ public class PlayerTurnScreen extends Screen {
         } else if (theirGrid.getCoordinateState(i, j) == 222) {
             return "x";
         } else if (theirGrid.getCoordinateState(i, j) == 110) {
-            return "o";
+            return "//";
         } else {
             return "";
         }
@@ -193,7 +198,7 @@ public class PlayerTurnScreen extends Screen {
         if (state == 100) {
             return "";
         } else {
-            return "o";
+            return "//";
         }
     }
 

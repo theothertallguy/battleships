@@ -28,7 +28,6 @@ public class ShipPlaceWaitMenu extends JPanel {
         });
 
         return button4;
-
     }
 
     private JButton placeShipsButton() {

@@ -36,6 +36,8 @@ public class PlayerTurnMenu extends JPanel {
                         gameGUI.getGame().swapTurn();
                         gameGUI.playerWait();
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please fire before ending your turn.");
                 }
             }
         });

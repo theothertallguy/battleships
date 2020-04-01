@@ -1,7 +1,5 @@
 package ui.display.screens;
 
-import ui.display.GameGUI;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -33,5 +31,9 @@ public abstract class Screen extends JPanel {
 
     public Point getSelect() {
         return null;
+    }
+
+    public boolean stillPlacing() {
+        return false;
     }
 }

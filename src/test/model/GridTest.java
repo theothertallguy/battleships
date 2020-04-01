@@ -24,7 +24,7 @@ public class GridTest {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                assertEquals(100, testGrid.getCoordinateState(i, j));
+                assertEquals(GridSquare.EMPTY_SQUARE, testGrid.getCoordinateState(i, j));
             }
         }
     }
@@ -62,28 +62,28 @@ public class GridTest {
     @Test
     void testShootingAndBoatHitting() {
         testGrid.shootAtGrid(0,0);
-        assertEquals(110, testGrid.getCoordinateState(0,0));
+        assertEquals(GridSquare.MISSED_SQUARE, testGrid.getCoordinateState(0,0));
 
         testGrid.shootAtGrid(2,6);
-        assertEquals(111, testGrid.getCoordinateState(2,6));
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE, testGrid.getCoordinateState(2,6));
         assertEquals(1, testGrid.getPatrolHits());
 
         testGrid.shootAtGrid(4,4);
-        assertEquals(111, testGrid.getCoordinateState(4,4));
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE, testGrid.getCoordinateState(4,4));
         assertEquals(1, testGrid.getSubmarineHits());
 
         testGrid.shootAtGrid(1,1);
-        assertEquals(111, testGrid.getCoordinateState(1,1));
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE, testGrid.getCoordinateState(1,1));
         assertEquals(1, testGrid.getDestroyerHits());
 
         testGrid.shootAtGrid(2,0);
-        assertEquals(111, testGrid.getCoordinateState(2,0));
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE, testGrid.getCoordinateState(2,0));
         assertEquals(1, testGrid.getBattleshipHits());
 
         testGrid.shootAtGrid(5,9);
         testGrid.shootAtGrid(9,9);
-        assertEquals(111, testGrid.getCoordinateState(5,9));
-        assertEquals(111, testGrid.getCoordinateState(9,9));
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE, testGrid.getCoordinateState(5,9));
+        assertEquals(GridSquare.HIT_BOAT_ON_SQUARE, testGrid.getCoordinateState(9,9));
         assertEquals(2, testGrid.getAircraftCarrierHits());
     }
 
@@ -151,9 +151,9 @@ public class GridTest {
 
         assertTrue(testGrid.isEqualTo(testGrid));
 
-        badGrid.getBattleGrid()[0][0].setSquareState(111);
+        badGrid.getBattleGrid()[0][0].setSquareState(GridSquare.HIT_BOAT_ON_SQUARE);
         assertFalse(badGrid.isEqualTo(testGrid));
-        badGrid.getBattleGrid()[0][0].setSquareState(100);
+        badGrid.getBattleGrid()[0][0].setSquareState(GridSquare.EMPTY_SQUARE);
 
         badGrid.getBattleGrid()[0][0].setBoatRef(6);
         assertFalse(badGrid.isEqualTo(testGrid));

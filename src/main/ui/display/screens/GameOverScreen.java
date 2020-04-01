@@ -16,5 +16,11 @@ public class GameOverScreen extends Screen {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         g.fillRect(0,0, 2000,2000);
+
+        Font font = new Font("Serif", Font.PLAIN, 60);
+
+        g.setFont(font);
+        g.setColor(Color.ORANGE);
+        g.drawString("Game Over",100,100);
     }
 }
