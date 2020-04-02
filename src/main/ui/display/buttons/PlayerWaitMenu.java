@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * This is the button menu for the PlayerWaitScreen screen. It allows the player to start their turn or pause.
+ * */
+
 public class PlayerWaitMenu extends JPanel {
     private GameGUI gameGUI;
 

@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * This is the button menu for the PlayerPauseScreen screen. It allows the player to resume the game, and
+ * quit either with or without saving.
+ * */
+
 public class PauseMenu extends JPanel {
     private GameGUI gameGUI;
 

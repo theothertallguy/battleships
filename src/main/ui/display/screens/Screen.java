@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
+/*
+ * This is the superclass for all of the other screens. Mouse events are sent to this, and the subclasses can
+ * override the methods as necessary.
+ * */
+
 public abstract class Screen extends JPanel {
     public void handleMousePressed(MouseEvent e)  {
 

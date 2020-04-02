@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * This is the button menu for the PlayerWaitScreen screen. It allows the player to start a new game or
+ * load a saved one.
+ * */
+
 public class MainMenu extends JPanel {
     private GameGUI gameGUI;
 

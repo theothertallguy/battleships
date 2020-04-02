@@ -10,6 +10,12 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
+/*
+ * This is the main GUI class. It has all of the methods to swap to a new screen, and also deals with
+ * the mouse inputs by sending them to the current screen for them to deal with, The handleMouseXXX schema
+ * was largely inspired by the DrawingPlayer lecture lab we did in class.
+ * */
+
 public class GameGUI {
 
     private static final int WIDTH = 1219;

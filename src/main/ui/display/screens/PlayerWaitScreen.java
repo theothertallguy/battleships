@@ -4,6 +4,10 @@ import ui.BattleshipGame;
 
 import java.awt.*;
 
+/*
+ * This is the screen where the player waits before firing at the opponent's grid in secrecy.
+ * */
+
 public class PlayerWaitScreen extends Screen {
     BattleshipGame currGame;
 

@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * This is the button menu for the GameOverScreen screen. It allows the player to exit to the main menu
+ * after someone wins.
+ * */
+
 public class GameOverMenu extends JPanel {
     GameGUI gameGUI;
 

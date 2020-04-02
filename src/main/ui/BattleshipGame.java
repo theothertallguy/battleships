@@ -5,13 +5,11 @@ import persistence.LoadGame;
 import persistence.SaveGame;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /*
-* This class runs the game on a loop. The game runs through each time, and when it ends, through someone winning ot the
-* player choosing to quit, they can choose to play again. The way it runs is each player places their ships, and the
-* players then take turns shooting a shot at the opponent's grid. Between each player's turn, they confirm the start and
-* end of their turns, so as to keep the other's board secret. Players can quit between turns.
+* This class os the bridge between the model and persistence packages and the ui package. It exists to ensure
+* that classes aren't extending into objects for their functions, but instead calls through to reach them.
+* Particularly useful for translating the inputs from the GUI and ensuring they are documented accordingly.
 * */
 
 public class BattleshipGame {
@@ -27,6 +25,7 @@ public class BattleshipGame {
 
     }
 
+    //EFFECTS: returns the Grid of the player whose turn it currently is.
     public Grid getCurrPlayer() {
         if (currTurn == 1) {
             return player1;
@@ -35,6 +34,7 @@ public class BattleshipGame {
         return player2;
     }
 
+    //EFFECTS: Returns the grid of the current player's opponent
     public Grid getOppPlayer() {
         if (currTurn == 2) {
             return player1;
@@ -43,6 +43,9 @@ public class BattleshipGame {
         return player2;
     }
 
+    //REQUIRES: a row and column between 0 and 9
+    //MODIFIES: getOppPlayer()
+    //EFFECTS: fires at the current opponent grid
     public void fireAtGrid(int column, int row) {
         if (currTurn == 2) {
             player1.shootAtGrid(row,column);

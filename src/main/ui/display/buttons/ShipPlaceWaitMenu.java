@@ -4,8 +4,11 @@ import ui.display.GameGUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+/*
+ * This is the button menu for the ShipPlaceWaitScreen screen. It allows the player to proceed to place their ships,
+ * or pause the game.
+ * */
 
 public class ShipPlaceWaitMenu extends JPanel {
     GameGUI gameGUI;

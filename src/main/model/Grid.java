@@ -185,6 +185,8 @@ public class Grid {
         }
     }
 
+    //MODIFIES: GridSquare
+    //EFFECTS:  removes boat with given ID from the grid
     public void removeBoatFromGrid(int boatID) {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {

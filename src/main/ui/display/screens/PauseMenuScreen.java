@@ -4,6 +4,10 @@ import ui.BattleshipGame;
 
 import java.awt.*;
 
+/*
+ * This is the pause screen. It tells the player which turn it is currently.
+ * */
+
 public class PauseMenuScreen extends Screen {
     private BattleshipGame currGame;
 

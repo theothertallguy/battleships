@@ -4,6 +4,10 @@ import ui.BattleshipGame;
 
 import java.awt.*;
 
+/*
+ * This is the game over screen, which displays the winning player at the end of the game.
+ * */
+
 public class GameOverScreen extends Screen {
     private BattleshipGame currGame;
 

@@ -1,11 +1,14 @@
 package ui.display.screens;
 
-import model.Grid;
 import model.GridSquare;
 import ui.BattleshipGame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+
+/*
+ * This is the screen where the player clicks n the screen to fire at their opponent's grid.
+ * */
 
 public class PlayerTurnScreen extends Screen {
     private BattleshipGame currGame;

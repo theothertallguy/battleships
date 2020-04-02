@@ -5,6 +5,10 @@ import ui.display.GameGUI;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+ * This is the panel that all of the button menus get added onto to be placed onto the main GUI.
+ * */
+
 public class ButtonBox extends JPanel {
     private GameGUI gameGUI;
 

@@ -4,6 +4,10 @@ import ui.BattleshipGame;
 
 import java.awt.*;
 
+/*
+ * This is the screen where the player waits before placing their ships in secrecy.
+ * */
+
 public class ShipPlaceWaitScreen extends Screen {
     private BattleshipGame currGame;
 

@@ -8,6 +8,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * This is the button menu for the PlaceShipScreen screen. It allows the player to end their turn if the player
+ * has placed all of their ships, or pause.
+ * */
+
 public class ShipPlaceMenu extends JPanel {
     private GameGUI gameGUI;
     private BattleshipGame currGame;
@@ -19,7 +24,6 @@ public class ShipPlaceMenu extends JPanel {
         add(new JLabel("PLACE YOUR SHIPS"));
         add(endTurnButton());
         add(pauseButton());
-        add(mainMenuButton());
         add(new JLabel("PLAYER TWO"));
     }
 
@@ -38,19 +42,6 @@ public class ShipPlaceMenu extends JPanel {
                     currGame.swapTurn();
                     gameGUI.playerWait();
                 }
-            }
-        });
-
-        return button4;
-    }
-
-    private JButton mainMenuButton() {
-        JButton button4 = new JButton("Main Menu");
-        button4.setPreferredSize(new Dimension(100,50));
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameGUI.mainMenu();
             }
         });
 

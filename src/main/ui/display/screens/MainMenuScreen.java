@@ -4,6 +4,10 @@ import java.awt.*;
 
 public class MainMenuScreen extends Screen {
 
+    /*
+     * This is the main menu screen. It shows the name of the game and the wonderful programmer who coded it.
+     * */
+
     public MainMenuScreen() {
 
     }

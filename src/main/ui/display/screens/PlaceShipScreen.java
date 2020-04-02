@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 
+/*
+ * This is the screen where the player places their ships before the game begins.
+ * */
+
 public class PlaceShipScreen extends Screen {
     private static final int PATROL_LENGTH = 2;
     private static final int SUBMARINE_LENGTH = 3;
