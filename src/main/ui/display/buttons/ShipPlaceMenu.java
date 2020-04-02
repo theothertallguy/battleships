@@ -1,5 +1,6 @@
 package ui.display.buttons;
 
+import ui.BattleshipGame;
 import ui.display.GameGUI;
 
 import javax.swing.*;
@@ -9,9 +10,11 @@ import java.awt.event.ActionListener;
 
 public class ShipPlaceMenu extends JPanel {
     private GameGUI gameGUI;
+    private BattleshipGame currGame;
 
     public ShipPlaceMenu(GameGUI gui) {
         gameGUI = gui;
+        currGame = gameGUI.getGame();
         setBackground(Color.BLACK);
         add(new JLabel("PLACE YOUR SHIPS"));
         add(endTurnButton());
@@ -28,11 +31,11 @@ public class ShipPlaceMenu extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (gameGUI.getMainPanel().stillPlacing()) {
                     JOptionPane.showMessageDialog(null, "You must place all five ships.");
-                } else if (gameGUI.getGame().getCurrTurn() == 1) {
-                    gameGUI.getGame().swapTurn();
+                } else if (currGame.getCurrTurn() == 1) {
+                    currGame.swapTurn();
                     gameGUI.shipWait();
-                } else if (gameGUI.getGame().getCurrTurn() == 2) {
-                    gameGUI.getGame().swapTurn();
+                } else if (currGame.getCurrTurn() == 2) {
+                    currGame.swapTurn();
                     gameGUI.playerWait();
                 }
             }

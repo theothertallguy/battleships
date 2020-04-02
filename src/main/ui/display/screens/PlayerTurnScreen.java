@@ -1,22 +1,23 @@
 package ui.display.screens;
 
 import model.Grid;
+import model.GridSquare;
+import ui.BattleshipGame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class PlayerTurnScreen extends Screen {
-    Grid myGrid;
-    Grid theirGrid;
+    private BattleshipGame currGame;
+
     int fireX = -1;
 
     int fireY = -1;
 
     Point select = null;
 
-    public PlayerTurnScreen(Grid playerGrid, Grid enemyGrid) {
-        myGrid = playerGrid;
-        theirGrid = enemyGrid;
+    public PlayerTurnScreen(BattleshipGame game) {
+        currGame = game;
     }
 
     public void paintComponent(Graphics g) {
@@ -97,9 +98,9 @@ public class PlayerTurnScreen extends Screen {
             y = y + 10;
             y = y + 45;
 
-            int oppSqrState = theirGrid.getCoordinateState(fireY,fireX);
+            int oppSqrState = currGame.oppGridCoordinateState(fireY,fireX);
 
-            if (oppSqrState == 100 || oppSqrState == 101) {
+            if (oppSqrState == GridSquare.EMPTY_SQUARE || oppSqrState == GridSquare.BOAT_ON_SQUARE) {
                 select = new Point(x,y);
             }
         }
@@ -114,11 +115,11 @@ public class PlayerTurnScreen extends Screen {
     }
 
     private String oppSTR(int i, int j) {
-        if (theirGrid.getCoordinateState(i, j) == 111) {
+        if (currGame.oppGridCoordinateState(i, j) == GridSquare.HIT_BOAT_ON_SQUARE) {
             return "X";
-        } else if (theirGrid.getCoordinateState(i, j) == 222) {
+        } else if (currGame.oppGridCoordinateState(i, j) == GridSquare.SUNK_BOAT_ON_SQUARE) {
             return "x";
-        } else if (theirGrid.getCoordinateState(i, j) == 110) {
+        } else if (currGame.oppGridCoordinateState(i, j) == GridSquare.MISSED_SQUARE) {
             return "//";
         } else {
             return "";
@@ -126,9 +127,8 @@ public class PlayerTurnScreen extends Screen {
     }
 
     private String getSTR(int i, int j) {
-        String str = "";
-        int a = myGrid.getBoatTypeOnSquare(i,j);
-        int b = myGrid.getCoordinateState(i,j);
+        int a = currGame.currPlayerBoatOnSquare(i,j);
+        int b = currGame.currPlayerGridCoordinateState(i,j);
         return printState(a,b);
     }
 
@@ -150,7 +150,7 @@ public class PlayerTurnScreen extends Screen {
 
     //EFFECTS: produces the graphics icon for a square with a patrol boat on it
     private String patrolIcon(int state) {
-        if (state == 101) {
+        if (state == GridSquare.BOAT_ON_SQUARE) {
             return "P";
         } else {
             return "p";
@@ -159,7 +159,7 @@ public class PlayerTurnScreen extends Screen {
 
     //EFFECTS: produces the graphics icon for a square with a submarine on it
     private String submarineIcon(int state) {
-        if (state == 101) {
+        if (state == GridSquare.BOAT_ON_SQUARE) {
             return "S";
         } else {
             return "s";
@@ -168,7 +168,7 @@ public class PlayerTurnScreen extends Screen {
 
     //EFFECTS: produces the graphics icon for a square with a destroyer on it
     private String destroyerIcon(int state) {
-        if (state == 101) {
+        if (state == GridSquare.BOAT_ON_SQUARE) {
             return "D";
         } else {
             return "d";
@@ -177,7 +177,7 @@ public class PlayerTurnScreen extends Screen {
 
     //EFFECTS: produces the graphics icon for a square with a battleship on it
     private String battleshipIcon(int state) {
-        if (state == 101) {
+        if (state == GridSquare.BOAT_ON_SQUARE) {
             return "B";
         } else {
             return "b";
@@ -186,7 +186,7 @@ public class PlayerTurnScreen extends Screen {
 
     //EFFECTS: produces the graphics icon for a square with an aircraft carrier on it
     private String aircraftCarrierIcon(int state) {
-        if (state == 101) {
+        if (state == GridSquare.BOAT_ON_SQUARE) {
             return "A";
         } else {
             return "a";
@@ -195,7 +195,7 @@ public class PlayerTurnScreen extends Screen {
 
     //EFFECTS: produces the graphics icon for an empty square
     private String emptySquareIcon(int state) {
-        if (state == 100) {
+        if (state == GridSquare.EMPTY_SQUARE) {
             return "";
         } else {
             return "//";

@@ -1,14 +1,14 @@
 package ui.display.screens;
 
-import ui.display.GameGUI;
+import ui.BattleshipGame;
 
 import java.awt.*;
 
 public class GameOverScreen extends Screen {
-    private GameGUI gameGUI;
+    private BattleshipGame currGame;
 
-    public GameOverScreen(GameGUI gui) {
-        gameGUI = gui;
+    public GameOverScreen(BattleshipGame game) {
+        currGame = game;
     }
 
     @Override
@@ -22,5 +22,7 @@ public class GameOverScreen extends Screen {
         g.setFont(font);
         g.setColor(Color.ORANGE);
         g.drawString("Game Over",100,100);
+
+        g.drawString("The Winner Is: " + currGame.getCurrTurn(),100,100);
     }
 }

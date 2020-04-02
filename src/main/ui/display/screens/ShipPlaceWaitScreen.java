@@ -1,14 +1,14 @@
 package ui.display.screens;
 
-import ui.display.GameGUI;
+import ui.BattleshipGame;
 
 import java.awt.*;
 
 public class ShipPlaceWaitScreen extends Screen {
-    private GameGUI gameGUI;
+    private BattleshipGame currGame;
 
-    public ShipPlaceWaitScreen(GameGUI gui) {
-        gameGUI = gui;
+    public ShipPlaceWaitScreen(BattleshipGame game) {
+        currGame = game;
     }
 
     @Override
@@ -16,5 +16,26 @@ public class ShipPlaceWaitScreen extends Screen {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         g.fillRect(0,0, 2000,2000);
+        g.setColor(Color.BLUE);
+
+        Font font = new Font("Serif", Font.PLAIN, 60);
+
+        g.setFont(font);
+
+        g.drawString("CURRENT TURN", 100,100);
+        g.drawString("LOOK AWAY", 700,100);
+
+        g.setColor(Color.cyan);
+
+        g.drawString("PLAYER " + currGame.getCurrTurn(), 150,300);
+        g.drawString("PLAYER " + otherTurn(), 750,300);
+    }
+
+    private int otherTurn() {
+        if (currGame.getCurrTurn() == 2) {
+            return 1;
+        }
+
+        return 2;
     }
 }

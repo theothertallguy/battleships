@@ -23,6 +23,7 @@ public class GameOverMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameGUI.mainMenu();
+                gameGUI.getGame().gameReset();
             }
         });
 

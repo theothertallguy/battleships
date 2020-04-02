@@ -99,4 +99,40 @@ public class BattleshipGame {
             currTurn = 1;
         }
     }
+
+    public int currPlayerBoatOnSquare(int y, int x) {
+        return getCurrPlayer().getBoatTypeOnSquare(y,x);
+    }
+
+    public int oppGridCoordinateState(int i, int j) {
+        return getOppPlayer().getCoordinateState(i,j);
+    }
+
+    public int currPlayerGridCoordinateState(int i, int j) {
+        return getCurrPlayer().getCoordinateState(i,j);
+    }
+
+    public void currPlayerRemoveBoatWithID(int currTool) {
+        getCurrPlayer().removeBoatFromGrid(currTool);
+    }
+
+    public void currPlayerMakePatrolBoat(String coordinateOf, char charAt) {
+        getCurrPlayer().makePatrolBoat(coordinateOf,charAt);
+    }
+
+    public void currPlayerMakeSubmarineBoat(String coordinateOf, char charAt) {
+        getCurrPlayer().makeSubmarineBoat(coordinateOf,charAt);
+    }
+
+    public void currPlayerMakeDestroyerBoat(String coordinateOf, char charAt) {
+        getCurrPlayer().makeDestroyerBoat(coordinateOf,charAt);
+    }
+
+    public void currPlayerMakeBattleshipBoat(String coordinateOf, char charAt) {
+        getCurrPlayer().makeBattleshipBoat(coordinateOf,charAt);
+    }
+
+    public void currPlayerMakeAircraftCarrierBoat(String coordinateOf, char charAt) {
+        getCurrPlayer().makeAircraftCarrierBoat(coordinateOf,charAt);
+    }
 }

@@ -1,5 +1,6 @@
 package ui.display.buttons;
 
+import ui.BattleshipGame;
 import ui.display.GameGUI;
 
 import javax.swing.*;
@@ -9,11 +10,13 @@ import java.awt.event.ActionListener;
 
 public class PlayerTurnMenu extends JPanel {
     private GameGUI gameGUI;
+    private BattleshipGame currGame;
 
     private boolean done = false;
 
     public PlayerTurnMenu(GameGUI gui) {
         gameGUI = gui;
+        currGame = gameGUI.getGame();
         setBackground(Color.BLACK);
         add(new JLabel("PLAYER ONE"));
         add(fireButton());
@@ -30,10 +33,10 @@ public class PlayerTurnMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (done) {
-                    if (gameGUI.getGame().boatSinkTester() == 5) {
+                    if (currGame.boatSinkTester() == 5) {
                         gameGUI.gameOver();
                     } else {
-                        gameGUI.getGame().swapTurn();
+                        currGame.swapTurn();
                         gameGUI.playerWait();
                     }
                 } else {
@@ -90,20 +93,26 @@ public class PlayerTurnMenu extends JPanel {
 
         if (done) {
             JOptionPane.showMessageDialog(null, "You already fired this turn..");
+
         } else if (-1 == column && -1 == row) {
             JOptionPane.showMessageDialog(null, "Please select a square to fire at.");
+
         } else if (gameGUI.getMainPanel().getSelect() != null) {
-            int preCheck = gameGUI.getGame().boatSinkTester();
-            gameGUI.getGame().fireAtGrid(column,row);
-            if (gameGUI.getGame().boatSinkTester() > preCheck) {
+            int preCheck = currGame.boatSinkTester();
+            currGame.fireAtGrid(column,row);
+
+            if (currGame.boatSinkTester() > preCheck) {
                 gameGUI.getGameFrame().repaint();
                 JOptionPane.showMessageDialog(null, "Whoa! You just sunk one of their ships!.");
-            } else if (111 == gameGUI.getGame().getOppPlayer().getCoordinateState(row,column)) {
+
+            } else if (111 == currGame.getOppPlayer().getCoordinateState(row,column)) {
                 gameGUI.getGameFrame().repaint();
                 JOptionPane.showMessageDialog(null, "You hit one of their ships!.");
+
             } else {
                 gameGUI.getGameFrame().repaint();
                 JOptionPane.showMessageDialog(null, "You missed your shot...");
+
             }
             done = true;
         }

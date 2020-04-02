@@ -43,3 +43,11 @@ Phase 4: Task 2
 - The associated classes are Screen being the superclass, and all the other screens in the screen package being the subtypes.
 - In many of the subclasses, the handleMouseClicked method is overridden from the Screen supertype, and Screen 
     itself extends JPanel, so all of the screens override the paintComponent method from the JPanel supertype.
+    
+Phase 4: Task 3
+- In terms of coupling, one of the changes I am making is taking the variables I assigned for square states in the 
+    GridSquare class and ensuring that they are directly referenced in other classes. I will try to do the same
+    with the boatIDs and boat lengths as well.
+- In terms of cohesion, a change I am making is turning the BattleshipGame class into a bridge between the ui and
+    model/persistence folders. This way, I won't have classes reaching into the Grid/Boat/GridSquare classes for
+    their implementation, I can instead refer just to the BattleshipGame Class, instead of through it.

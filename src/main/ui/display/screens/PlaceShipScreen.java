@@ -1,8 +1,7 @@
 package ui.display.screens;
 
-import model.Boat;
-import model.Grid;
-import ui.display.GameGUI;
+import model.GridSquare;
+import ui.BattleshipGame;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -15,9 +14,7 @@ public class PlaceShipScreen extends Screen {
     private static final int BATTLESHIP_LENGTH = 4;
     private static final int AIRCRAFT_CARRIER_LENGTH = 5;
 
-    private GameGUI gameGUI;
-
-    Grid myGrid;
+    private BattleshipGame currGame;
 
     int fireX = -1;
     int fireY = -1;
@@ -35,9 +32,8 @@ public class PlaceShipScreen extends Screen {
     private HashMap<Integer,Point> locationOfBoatMap;
     private HashMap<Integer,String> dirMap;
 
-    public PlaceShipScreen(GameGUI gui) {
-        gameGUI = gui;
-        myGrid = gui.getGame().getCurrPlayer();
+    public PlaceShipScreen(BattleshipGame game) {
+        currGame = game;
         lengthMapSetup();
         isPlaceMapSetup();
         locationOfBoatMapSetup();
@@ -110,7 +106,6 @@ public class PlaceShipScreen extends Screen {
     private void drawPlacedBoats(Graphics g) {
         for (int i = 1; i <= 5; i++) {
             if (isPlacedMap.get(i)) {
-                System.out.println();
                 if (dirMap.get(i).equals("N")) {
                     drawNorth(g,i);
                 } else if (dirMap.get(i).equals("S")) {
@@ -128,7 +123,7 @@ public class PlaceShipScreen extends Screen {
         for (int j = 0; j < lengthMap.get(i); j++) {
             int x = locationOfBoatMap.get(i).x * 50 + 55 - 50 * j;
             int y = locationOfBoatMap.get(i).y * 50 + 95;
-            g.drawString(printState(i,101), x, y);
+            g.drawString(printState(i, GridSquare.BOAT_ON_SQUARE), x, y);
         }
     }
 
@@ -136,7 +131,7 @@ public class PlaceShipScreen extends Screen {
         for (int j = 0; j < lengthMap.get(i); j++) {
             int x = locationOfBoatMap.get(i).x * 50 + 55 + 50 * j;
             int y = locationOfBoatMap.get(i).y * 50 + 95;
-            g.drawString(printState(i,101), x, y);
+            g.drawString(printState(i,GridSquare.BOAT_ON_SQUARE), x, y);
         }
     }
 
@@ -144,7 +139,7 @@ public class PlaceShipScreen extends Screen {
         for (int j = 0; j < lengthMap.get(i); j++) {
             int x = locationOfBoatMap.get(i).x * 50 + 55;
             int y = locationOfBoatMap.get(i).y * 50 + 95 + 50 * j;
-            g.drawString(printState(i,101), x, y);
+            g.drawString(printState(i,GridSquare.BOAT_ON_SQUARE), x, y);
         }
     }
 
@@ -152,7 +147,7 @@ public class PlaceShipScreen extends Screen {
         for (int j = 0; j < lengthMap.get(i); j++) {
             int x = locationOfBoatMap.get(i).x * 50 + 55;
             int y = locationOfBoatMap.get(i).y * 50 + 95 - 50 * j;
-            g.drawString(printState(i,101), x, y);
+            g.drawString(printState(i,GridSquare.BOAT_ON_SQUARE), x, y);
         }
     }
 
@@ -210,7 +205,7 @@ public class PlaceShipScreen extends Screen {
 
     private boolean noOverlapIfPlaced(int x, int y) {
         if (0 <= x && x <= 9 && 0 <= y && y <= 9) {
-            if (myGrid.getBoatTypeOnSquare(y,x) != 0) {
+            if (currGame.currPlayerBoatOnSquare(y,x) != 0) {
                 return false;
             }
         } else {
@@ -306,13 +301,33 @@ public class PlaceShipScreen extends Screen {
     }
 
     private void placeInDirection(String dir, Point centre) {
-        myGrid.removeBoatFromGrid(currTool);
-        myGrid.placeBoatOnGrid(new Boat(currTool,coordinateOf(centre),dir.charAt(0)));
+        currGame.currPlayerRemoveBoatWithID(currTool);
+        placeCurrBoat(centre, dir);
         isPlacedMap.put(currTool,true);
         locationOfBoatMap.put(currTool,centre);
         dirMap.put(currTool,dir);
         endingPlacing = true;
         select = new Point(-1,-1);
+    }
+
+    private void placeCurrBoat(Point centre, String dir) {
+        switch (currTool) {
+            case 1:
+                currGame.currPlayerMakePatrolBoat(coordinateOf(centre),dir.charAt(0));
+                break;
+            case 2:
+                currGame.currPlayerMakeSubmarineBoat(coordinateOf(centre),dir.charAt(0));
+                break;
+            case 3:
+                currGame.currPlayerMakeDestroyerBoat(coordinateOf(centre),dir.charAt(0));
+                break;
+            case 4:
+                currGame.currPlayerMakeBattleshipBoat(coordinateOf(centre),dir.charAt(0));
+                break;
+            default:
+                currGame.currPlayerMakeAircraftCarrierBoat(coordinateOf(centre),dir.charAt(0));
+                break;
+        }
     }
 
     private String coordinateOf(Point centre) {
@@ -325,7 +340,6 @@ public class PlaceShipScreen extends Screen {
 
     private void shipPlaceAreaDetect(MouseEvent e) {
         int tool = whichBoat(e);
-        System.out.println(tool);
         if (inBox(e.getX(),e.getY())) {
             if (tool == 1) {
                 placeBoat = new Point(1,1);
@@ -401,8 +415,8 @@ public class PlaceShipScreen extends Screen {
     }
 
     private String getSTR(int i, int j) {
-        int a = myGrid.getBoatTypeOnSquare(i,j);
-        int b = myGrid.getCoordinateState(i,j);
+        int a = currGame.currPlayerBoatOnSquare(i,j);
+        int b = currGame.currPlayerGridCoordinateState(i,j);
         return printState(a,b);
     }
 

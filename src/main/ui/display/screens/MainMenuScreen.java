@@ -1,15 +1,11 @@
 package ui.display.screens;
 
-import ui.display.GameGUI;
-
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public class MainMenuScreen extends Screen {
-    GameGUI gameGUI;
 
-    public MainMenuScreen(GameGUI gui) {
-        gameGUI = gui;
+    public MainMenuScreen() {
+
     }
 
     @Override

@@ -20,12 +20,7 @@ public class ShipPlaceWaitMenu extends JPanel {
     private JButton pauseGameButton() {
         JButton button4 = new JButton("Pause Game");
         button4.setPreferredSize(new Dimension(300,150));
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameGUI.playerPause();
-            }
-        });
+        button4.addActionListener(e -> gameGUI.playerPause());
 
         return button4;
     }
@@ -33,12 +28,7 @@ public class ShipPlaceWaitMenu extends JPanel {
     private JButton placeShipsButton() {
         JButton button4 = new JButton("Place My Ships");
         button4.setPreferredSize(new Dimension(300,150));
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameGUI.shipPlace();
-            }
-        });
+        button4.addActionListener(e -> gameGUI.shipPlace());
 
         return button4;
 

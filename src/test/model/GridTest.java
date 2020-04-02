@@ -236,4 +236,21 @@ public class GridTest {
         assertFalse(badGrid.isEqualTo(testGrid));
         badGrid.setAircraftCarrierBoat(goodAB);
     }
+
+    @Test
+    void testBoatRemover() {
+        assertEquals(5,testGrid.getBoatTypeOnSquare(9,9));
+        assertEquals(5,testGrid.getBoatTypeOnSquare(8,9));
+        assertEquals(5,testGrid.getBoatTypeOnSquare(7,9));
+        assertEquals(5,testGrid.getBoatTypeOnSquare(6,9));
+        assertEquals(5,testGrid.getBoatTypeOnSquare(5,9));
+
+        testGrid.removeBoatFromGrid(5);
+
+        assertEquals(0,testGrid.getBoatTypeOnSquare(9,9));
+        assertEquals(0,testGrid.getBoatTypeOnSquare(8,9));
+        assertEquals(0,testGrid.getBoatTypeOnSquare(7,9));
+        assertEquals(0,testGrid.getBoatTypeOnSquare(6,9));
+        assertEquals(0,testGrid.getBoatTypeOnSquare(5,9));
+    }
 }

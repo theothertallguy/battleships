@@ -39,7 +39,4 @@ public class ButtonBox extends JPanel {
                 break;
         }
     }
-
-    private void playerWaitMenu() {
-    }
 }

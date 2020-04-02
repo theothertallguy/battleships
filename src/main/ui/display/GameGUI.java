@@ -19,7 +19,7 @@ public class GameGUI {
         return mainPanel;
     }
 
-    private Screen mainPanel = new MainMenuScreen(this);
+    private Screen mainPanel = new MainMenuScreen();
     private ButtonBox buttonBox = new ButtonBox(1,this);
 
     public ButtonBox getButtonBox() {
@@ -56,7 +56,7 @@ public class GameGUI {
     public void mainMenu() {
         gameFrame.remove(mainPanel);
         gameFrame.remove(buttonBox);
-        mainPanel = new MainMenuScreen(this);
+        mainPanel = new MainMenuScreen();
         gameFrame.add(mainPanel);
         buttonBox = new ButtonBox(2, this);
         gameFrame.add(BorderLayout.SOUTH, buttonBox);
@@ -65,7 +65,7 @@ public class GameGUI {
     public void playerTurn() {
         gameFrame.remove(mainPanel);
         gameFrame.remove(buttonBox);
-        mainPanel = new PlayerTurnScreen(game.getCurrPlayer(),game.getOppPlayer());
+        mainPanel = new PlayerTurnScreen(game);
         buttonBox = new ButtonBox(1, this);
         gameFrame.add(BorderLayout.SOUTH, buttonBox);
         gameFrame.add(mainPanel);
@@ -74,7 +74,7 @@ public class GameGUI {
     public void playerWait() {
         gameFrame.remove(mainPanel);
         gameFrame.remove(buttonBox);
-        mainPanel = new PlayerWaitScreen(this);
+        mainPanel = new PlayerWaitScreen(game);
         buttonBox = new ButtonBox(3,this);
         gameFrame.add(BorderLayout.SOUTH, buttonBox);
         gameFrame.add(mainPanel);
@@ -83,7 +83,7 @@ public class GameGUI {
     public void playerPause() {
         gameFrame.remove(mainPanel);
         gameFrame.remove(buttonBox);
-        mainPanel = new PauseMenuScreen(this);
+        mainPanel = new PauseMenuScreen(game);
         buttonBox = new ButtonBox(4,this);
         gameFrame.add(BorderLayout.SOUTH, buttonBox);
         gameFrame.add(mainPanel);
@@ -92,7 +92,7 @@ public class GameGUI {
     public void gameOver() {
         gameFrame.remove(mainPanel);
         gameFrame.remove(buttonBox);
-        mainPanel = new GameOverScreen(this);
+        mainPanel = new GameOverScreen(game);
         buttonBox = new ButtonBox(7,this);
         gameFrame.add(BorderLayout.SOUTH, buttonBox);
         gameFrame.add(mainPanel);
@@ -101,7 +101,7 @@ public class GameGUI {
     public void shipPlace() {
         gameFrame.remove(mainPanel);
         gameFrame.remove(buttonBox);
-        mainPanel = new PlaceShipScreen(this);
+        mainPanel = new PlaceShipScreen(game);
         buttonBox = new ButtonBox(6,this);
         gameFrame.add(BorderLayout.SOUTH, buttonBox);
         gameFrame.add(mainPanel);
@@ -110,7 +110,7 @@ public class GameGUI {
     public void shipWait() {
         gameFrame.remove(mainPanel);
         gameFrame.remove(buttonBox);
-        mainPanel = new ShipPlaceWaitScreen(this);
+        mainPanel = new ShipPlaceWaitScreen(game);
         buttonBox = new ButtonBox(5,this);
         gameFrame.add(BorderLayout.SOUTH, buttonBox);
         gameFrame.add(mainPanel);

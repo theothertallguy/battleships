@@ -1,14 +1,14 @@
 package ui.display.screens;
 
-import ui.display.GameGUI;
+import ui.BattleshipGame;
 
 import java.awt.*;
 
 public class PlayerWaitScreen extends Screen {
-    GameGUI gameGUI;
+    BattleshipGame currGame;
 
-    public PlayerWaitScreen(GameGUI gui) {
-        gameGUI = gui;
+    public PlayerWaitScreen(BattleshipGame game) {
+        currGame = game;
     }
 
     @Override
@@ -27,12 +27,12 @@ public class PlayerWaitScreen extends Screen {
 
         g.setColor(Color.cyan);
 
-        g.drawString("PLAYER" + gameGUI.getGame().getCurrTurn(), 150,300);
-        g.drawString("PLAYER" + otherTurn(), 750,300);
+        g.drawString("PLAYER " + currGame.getCurrTurn(), 150,300);
+        g.drawString("PLAYER " + otherTurn(), 750,300);
     }
 
     private int otherTurn() {
-        if (gameGUI.getGame().getCurrTurn() == 2) {
+        if (currGame.getCurrTurn() == 2) {
             return 1;
         }
 
