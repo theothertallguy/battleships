@@ -38,7 +38,7 @@ public class MainMenu extends JPanel {
     }
 
     private JButton newGameButton() {
-        JButton button4 = new JButton("Start New Game");
+        JButton button4 = new JButton("Start PvP Game");
         button4.setPreferredSize(new Dimension(300,150));
         button4.addActionListener(new ActionListener() {
             @Override
